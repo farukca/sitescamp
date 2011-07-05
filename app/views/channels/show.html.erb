@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @channel.name %>
+</p>
+
+<p>
+  <b>Desc:</b>
+  <%= @channel.desc %>
+</p>
+
+
+<%= link_to 'Edit', edit_channel_path(@channel) %> |
+<%= link_to 'Back', channels_path %>

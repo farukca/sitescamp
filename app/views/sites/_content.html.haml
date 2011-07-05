@@ -1,0 +1,87 @@
+:javascript
+  $(function(){
+    $('#add-rival').click(function(){
+      $('#add-rival-div').toggle();
+    });
+  });
+#content.span-14
+  #postmenu
+    .usual
+      %ul
+        %li
+          Post
+        %li
+          %ul.idTabs
+            %li
+              = link_to 'News', '#newpost'
+            %li
+              = link_to 'Question', '#newpost'
+            %li
+              = link_to 'Link', '#cel'
+    #newpost.inside
+      = form_for [@site, Post.new], :remote => true do |f|
+        = f.text_area :content, :rows => 1
+        = f.hidden_field :site_id, :value => @site.id
+        = f.hidden_field :user_id, :value => ""
+        = submit_tag 'Send', :class => "button", :disable_with => "sending..."
+    #cel
+      ikinci div
+  %h4 Public Posts
+  #latest-posts.widget
+    .inside
+      %h3 From the posts
+      %ul
+        = render @posts
+        = will_paginate @posts
+
+#right-sidebar.span-5.last
+  %h4 Right Sidebar
+  .widget
+    .inside
+      %h3 From the posts
+      %ul
+        %li 
+          = link_to 'Post title goes here', root_url
+          %p John Doe on April 10, 2010
+        %li 
+          = link_to 'Post title goes here', root_url
+          %p John Doe on April 10, 2010
+        %li
+          = link_to 'Post title goes here', root_url
+          %p John Doe on April 10, 2010
+      #add-rival
+        Add Competitor
+      #add-rival-div
+        = form_tag search_sites_path, :method => 'get' do
+          = text_field_tag :website, params[:website]
+          = hidden_field_tag :rival, :value => @site.id
+          = submit_tag "Add Rival", :name => nil
+    .inside
+      %h3 Testimonial
+      %p
+        Bakalim sonuç ne olacak, insanlara ona göre fikir verelim.
+				
+#featured-sites.span-24.last
+  #features-box
+    %h2 Last Welcomed Sites
+    .service-box
+      .inside
+        = image_tag "SDDMenu_files/database.png"
+        %h4 Web Host
+        %p 
+          Sitenin tanitimi, genel bilgileri tarzinda yazilar burada olur, tabii birde detay için 
+          =link_to "More...", root_url
+    .service-box
+      .inside
+        = image_tag "SDDMenu_files/target.png"
+        %h4 Web Host
+        %p
+          Sitenin tanitimi, genel bilgileri tarzinda yazilar burada olur, tabii birde detay için
+          =link_to "More...", root_url
+    .service-box.no-margin
+      .inside
+        = image_tag "SDDMenu_files/color.png"
+        %h4 Web Host
+        %p
+          Sitenin tanitimi, genel bilgileri tarzinda yazilar burada olur, tabii birde detay için
+          =link_to "More...", root_url

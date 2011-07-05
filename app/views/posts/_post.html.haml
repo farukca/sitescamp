@@ -1,0 +1,8 @@
+%li 
+  #post-user
+    = link_to (image_tag "SDDMenu_files/post-thumb1.png", :alt => post.user_id, :class => "img-load"), root_url
+  #post-content
+    = post.content
+    %br
+    = post.created_at
+    =# post.user.fullname

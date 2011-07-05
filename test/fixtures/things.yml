@@ -1,0 +1,11 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  campuser: MyString
+  name: MyString
+  model: MyString
+
+two:
+  campuser: MyString
+  name: MyString
+  model: MyString

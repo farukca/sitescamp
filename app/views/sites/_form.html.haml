@@ -1,0 +1,15 @@
+= semantic_form_for @site, :remote => true, :validate => :true, :html => { :multipart => :true } do |f|
+  - f.inputs do
+    = f.input :website 
+    = f.input :name
+    =# f.input :desc 
+    =# f.input :email
+    =# f.input :phone
+    = f.input :blog
+    =# f.input :feed_url
+    =# f.input :twitter
+    =# f.input :tags
+    =# f.input :category, :as => :select, :collection => Category.where({:category_type => 'F'})
+    = f.input :logo, :as => :file
+
+  = f.buttons

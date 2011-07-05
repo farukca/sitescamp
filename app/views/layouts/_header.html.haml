@@ -1,0 +1,16 @@
+#top-bar-outer
+  #top-bar-bg
+  #top-bar
+    .top-bar-inside
+      .static-links
+        #logo
+          = link_to root_url
+      .active-links
+        #session.loggedin
+          - if user_signed_in?
+            Welcome 
+            = current_user.email
+            = link_to "Signout", destroy_user_session_path
+          - else
+            = link_to "Sign up", new_user_registration_path
+            = link_to "Sign in", new_user_session_path

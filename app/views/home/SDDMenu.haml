@@ -1,0 +1,94 @@
+
+BODY#home-page
+
+.container
+  .span-24.last
+	#mainheader
+		%h2 Main Window
+
+	#site
+		#left-sidebar.span-5
+			%h4 Gabriel Byrne
+			#profile.widget
+				= img_tag 'SDDMenu_files/profile3.jpg', :alt => 'Gabriel Byrne'
+			#profiledets.widget
+				%ul
+					%li 
+					  = link_to "About.me", root_url
+					%li 
+					  = link_to (img_tag 'SDDMenu_files/dashb.jpg'), :class='img-load', current_user.home_url
+					%li 
+					  = link_to (img_tag 'SDDMenu_files/details.jpg'), :class='img-load', current_user_url
+					%li
+					  = link_to (img-tag 'SDDMenu_files/photos.jpg'), :class='img-load', current_user.photos_url
+					%li>
+					  = link_to (img_tag 'SDDMenu_files/videos2.jpg'), :class='img-load', current_user.videos_url
+		#content.span-14
+			%h4 Public Posts
+			#latest-posts.widget
+				.inside
+					%h3 From the posts
+					%ul
+						%li 
+						  = link_to (image_tag 'SDDMenu_files/post-thumb1.png'), :class => 'img-load', post.user.public_url
+						    Post title goes here
+						  %p John Doe on April 10, 2010
+						%li
+						  = link_to (image_tag 'SDDMenu_files/post-thumb2.png'), :class => 'img-load', post.user.public_url
+						    Post title goes here
+						  %p John Doe on April 10, 2010
+						%li
+						  = link_to (image_tag 'SDDMenu_files/post-thumb3.png'), :class => 'img-load', post.user.public_url
+						    Post title goes here
+						  %p John Doe on April 10, 2010
+
+		#right-sidebar.span-5.last
+			%h4 Right Sidebar
+			.widget
+				.inside
+					%h3 From the posts
+					%ul
+						%li 
+						  = link_to 'Post title goes here', post.site_url
+						  %p John Doe on April 10, 2010
+						%li 
+						  = link_to 'Post title goes here', post.site_url
+						  %p John Doe on April 10, 2010
+                        %li
+						  = link_to 'Post title goes here', post.site_url
+						  %p John Doe on April 10, 2010
+
+				.inside
+					%h3 Testimonial
+					%p
+						Bakalim sonuç ne olacak,
+						insanlara ona göre fikir verelim.
+
+						
+	#featured-sites.span-24.last
+		#features-box
+			%h2 Last Welcomed Sites
+			.service-box
+				.inside
+					= img_tag 'SDDMenu_files/database.png'
+					%h4 Web Host
+					%p
+						Sitenin tanitimi, genel bilgileri tarzinda yazilar burada olur,
+						tabii birde detay için 
+					=link_to 'More...', service_url(@service)
+			.service-box
+				.inside
+					= img_tag 'SDDMenu_files/target.png'
+					%h4 Web Host
+					%p
+						Sitenin tanitimi, genel bilgileri tarzinda yazilar burada olur,
+						tabii birde detay için
+					=link_to 'More...', service_url(@service)
+			.service-box.no-margin
+				.inside
+					= img_tag 'SDDMenu_files/color.png'
+					%h4 Web Host
+					%p
+						Sitenin tanitimi, genel bilgileri tarzinda yazilar burada olur,
+						tabii birde detay için
+					=link_to 'More...', service_url(@service)

@@ -1,0 +1,20 @@
+@charset "utf-8";
+/** Violet color scheme 
+
+	a:#b300ae
+	button:#fd3af8
+
+**/
+
+#content a {color:#b300ae;}
+#content .button:hover { background:#fd3af8; color:#333333; text-decoration:none;}
+p.tagline {color:#fff !important;}
+#home-page #header {background:url(../images/violet/home-bg.jpg) repeat-x top left; height:540px;  position:relative; margin-bottom:10px;}
+#sub-page #header {background:url(../images/violet/sub-bg.jpg) repeat-x top left; height:316px;  position:relative; margin-bottom:10px;}
+
+ul.sf-menu {background:url(../images/violet/nav-left.png) no-repeat top left;}
+#nav-finish {float:right; background:url(../images/violet/nav-right.png) no-repeat top right; width:8px; height:35px;}
+#pagename {height:100px; position:relative; background:url(../images/violet/pagename-bg.jpg) no-repeat top left;}
+
+.widget ul li a {background:#fff; border-bottom:#d1d1d1 1px solid; display:block; padding:7px 0 7px 5px; color:#b300ae;}
+#latest-posts ul li a {padding:0; color:#b300ae; border:none;}

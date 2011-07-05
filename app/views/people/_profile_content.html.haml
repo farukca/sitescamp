@@ -1,0 +1,131 @@
+- content_for :head do
+  :javascript
+    $(function(){
+      $('#add-rival').click(function(){
+        $('#add-rival-div').toggle();
+      });
+    });
+    $(document).ready(function() {
+      $(".toggle_container").hide();
+      $("h3.trigger").livequery('click', function(event){
+        $(this).toggleClass("active").next().slideToggle("slow");
+        return false;
+      });
+      $("#groups").accordion({
+        active: false, 
+        autoHeight: false
+      });
+      $("h3", "#groups").livequery('click', function(event){
+        strG = this.getAttribute("group_id")
+        if(strG != null) {
+          $.ajax({
+            url: "/feeds/groupfeeds/"+strG,
+            data: "group_id=" + strG,
+            success: function(data){
+              $('#'+strG).html(data);
+            }
+          });         
+        }
+        $("#groups").accordion();
+      });
+      $(".feedli").livequery('click', function(event){
+        f = this.getAttribute("feed_id")
+        if(f != null) {
+          $.ajax({
+            url: "/feedposts",
+            data: "feed_id=" + f
+          });         
+        }
+      });
+      $(".recommend_feed").livequery('click', function(event){
+        f = this.getAttribute("feed_id")
+        alert(f);
+        if(f != null) {
+          $.ajax({
+            url: "/people/follow/#{@person.id}",
+            data: "group_id=&feed_id=" + f,
+            dataType: "json"
+          });
+        }
+      });
+      $( "#newfeed li" ).draggable({
+        appendTo: "body",
+        helper: "clone"
+      });
+      $( "#groups h3" ).droppable({
+        activeClass: "ui-state-default",
+        hoverClass: "ui-state-hover",
+        accept: ":not(.ui-sortable-helper)",
+        drop: function( event, ui ) {
+          strG = this.getAttribute("group_id")
+          strF = ui.draggable.attr("source")
+          $.ajax({
+            url: "/people/follow/#{@person.id}",
+            data: "group_id=" + strG + "&feed_id=" + strF,
+            dataType: "json",
+            success: function(){
+              $( this ).find( ".acc_container" ).remove();
+              $( "<li></li>" ).text( ui.draggable.attr("source") ).appendTo( this );
+            }
+          });
+        }
+      });
+      $(".button").button();
+    });
+
+#content.span-14
+  #postmenu
+    .usual
+      %ul
+        %li
+          %ul.idTabs
+            %li
+              = link_to 'Posts', '#newpost'
+            %li
+              = link_to 'Links', '#newfeed'
+            %li
+              = link_to 'Interests', '#newinterest'
+            %li
+              = link_to 'Add Site', new_site_path, :rel => 'facebox', :id => "addsite"
+    #newpost.inside
+
+    #newfeed.inside
+      = form_for Feed.new, :remote => true do |f|
+        = f.text_field :feed_url
+        = f.hidden_field :person_id, :value => @person.id
+        = submit_tag 'Send', :class => "button", :disable_with => "sending..."
+  #latest-posts.widget
+    .inside
+      %ul#feedpost-list
+        - if @feedposts && @feedposts.count > 0
+          = render @feedposts
+      = link_to 'Show More', person_path(current_user.person), :class => "feed-show-more", :disable_with => "getting feeds..."
+
+    #newinterest.inside
+
+  %h4 Public Posts
+  #latest-posts.widget
+    .inside
+      %h3 From the posts
+      %ul
+        - if @posts && @posts.count > 0
+          = render @posts
+          = will_paginate @posts
+
+#right-sidebar.span-5.last
+  .widget
+    - if @recommendedfeeds && @recommendedfeeds.count > 0
+      %h4 You may follow
+      %ul
+        - for recfeed in @recommendedfeeds
+          %li
+            = image_tag "icons/follow_feed.jpg", :class => "recommend_feed", :feed_id => recfeed.id
+            = recfeed.title
+
+			
+#featured_sites
+  - if @sites && @sites.count > 0
+    - for site in @sites
+      .span-5.widget
+        = render 'sites/site_panel', :site => site
+    .span-9.last

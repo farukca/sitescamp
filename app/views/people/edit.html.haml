@@ -1,0 +1,15 @@
+
+#section_header
+  %h2
+    = t('settings')
+  %ul#settings_nav
+    %li=link_to t('profile'), edit_person_path(current_user.person)
+
+
+.span-19.prepend-5.last
+  - content_for :submit_block do
+    =# link_to t('cancel'), edit_user_path(current_user)
+    = t('or')
+    = submit_tag t('.update_profile')
+  = render :partial => 'people/edit'
+

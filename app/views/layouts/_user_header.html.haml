@@ -1,0 +1,86 @@
+#top-bar-outer
+  #top-bar-bg
+  #top-bar
+    .top-bar-inside
+      .static-links
+        #logo
+          = link_to root_url
+
+        #global-nav
+          %ul 
+            %li
+              = link_to "#", :class => "has-popupballoon button button-blue" do
+                %span.add
+                Add Feed
+              .popupballoon.top
+                %h5 Add new source
+                = semantic_form_for Feed.new, :remote => true, :validate => :true, :html => { :multipart => :true } do |f|
+                  - f.inputs do
+                    = f.input :feed_url, :label => "Feed url"
+                  = f.buttons do
+                    = f.commit_button :button_html => { :class => "orange", :disable_with => 'Wait...' }
+                    %li.cancel
+                      = link_to "Cancel", "#", :class => "button gray close"
+            %li
+              = link_to "#", :class => "has-popupballoon button button-blue" do
+                %span.add
+                Add Site
+              .popupballoon.top
+                %h5 Add new site
+                = semantic_form_for Site.new, :remote => true, :validate => :true, :html => { :multipart => :true } do |f|
+                  - f.inputs do
+                    = f.input :website, :label => "Website"
+                  = f.buttons do
+                    = f.commit_button :button_html => { :class => "orange", :disable_with => 'Wait...' }
+                    %li.cancel
+                      = link_to "Cancel", "#", :class => "buttons gray close"
+            %li#global-nav-home
+              = link_to "Home", root_url
+            - if user_signed_in?
+              %li#global-nav-profile
+                = link_to "Profile", profile_person_path(current_user.person)
+              %li#global-nav-messages
+                = link_to "Messages", root_url
+              %li#global-nav-whotofollow
+                = link_to "Who to follow", root_url
+            .clear
+        #global-user-nav
+          %ul
+            %li#global-user-links
+              - if user_signed_in?
+                = link_to current_user.email, profile_person_path(current_user.person)
+                %ul
+                  %li
+                    = link_to "Signout", destroy_user_session_path
+              - else
+                = link_to "Sign in", new_user_session_path
+#bottom
+  .container_12
+    .grid_12
+      #nav
+        %ul.sf-menu
+          %li.first
+            = link_to "Tech", root_url
+          %li
+            = link_to "Software", root_url
+          %li
+            = link_to "Hardware", root_url
+          %li
+            = link_to "Health", root_url
+          %li
+            = link_to "Aggriculture", root_url
+          %li
+            = link_to "Architecture", root_url
+          %li
+            = link_to "Sports", root_url
+          %li
+            = link_to "Logistics", root_url
+          %li
+            = link_to "Your Groups", "#"
+            %ul
+              %li.first
+                = link_to "Dropdown one", "#"
+              %li
+                = link_to "Dropdown two", "#"
+    .clear
+

@@ -1,0 +1,41 @@
+.container_12
+  .grid_3
+    #left-sidebar.span-5.last
+      %h3
+        Sign Up
+  #content.grid_6
+    %h3
+      Join Sitescamp
+    = form_for(resource, :as => resource_name, :url => session_path(resource_name), :id => 'signup', :class => 'standard-form') do |f|
+      %ul
+        %li
+          %label.label_name
+            = f.label :email
+          .fieldgroup
+            = f.text_field :email
+        %li
+          %label.label_name
+            = f.label :campuser
+          .fieldgroup
+            = f.text_field :campuser
+        %li
+          %label.label_name
+            = f.label :password
+          .fieldgroup
+            = f.password_field :password
+        %li
+          %label.label_name
+            = f.label :password_confirmation
+          .fieldgroup
+            = f.password_field :password_confirmation
+        %li
+          = f.submit "Join Sitescamp", :class => 'button button-gray'
+          %span 
+            already have an account 
+            = link_to "Login", new_session_path(resource_name)
+    =# render :partial => "devise/shared/links"
+
+  .grid_3
+    #right-sidebar.span-5.last
+      %h3
+        Sign Up

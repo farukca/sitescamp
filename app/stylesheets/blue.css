@@ -1,0 +1,20 @@
+@charset "utf-8";
+/** Blue color scheme 
+
+	a:#0062a1
+	button:#34afff
+
+**/
+
+#content a {color:#0062a1;}
+#content .button:hover { background:#34afff; color:#333333; text-decoration:none;}
+
+#home-page #header {background:url(../images/blue/home-bg.jpg) repeat-x top left; height:540px;  position:relative; margin-bottom:10px;}
+#sub-page #header {background:url(../images/blue/sub-bg.jpg) repeat-x top left; height:316px;  position:relative; margin-bottom:10px;}
+
+ul.sf-menu {background:url(../images/blue/nav-left.png) no-repeat top left;}
+#nav-finish {float:right; background:url(../images/blue/nav-right.png) no-repeat top right; width:8px; height:35px;}
+#pagename {height:100px; position:relative; background:url(../images/blue/pagename-bg.jpg) no-repeat top left;}
+
+.widget ul li a {background:#fff; border-bottom:#d1d1d1 1px solid; display:block; padding:7px 0 7px 5px; color:#0062a1;}
+#latest-posts ul li a {padding:0; color:#0062a1; border:none;}

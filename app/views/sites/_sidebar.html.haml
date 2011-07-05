@@ -1,0 +1,26 @@
+#left-sidebar.span-5
+  %h4
+    Gabriel Byrne
+  #profile.widget
+    =# image_tag "SDDMenu_files/profile3.jpg", :alt => "Gabriel Byrne"
+    = image_tag @site.logo.url(:medium)
+  #profiledets.widget
+    %ul
+      %li
+        = link_to "Edit Site", edit_site_path(@site)
+    %table
+      %tr
+        %td
+          = link_to (image_tag "icons/48x48/detail48.png", :class => "img-load"), root_url
+          %p Details
+        %td
+          = link_to (image_tag "icons/48x48/rss48.png", :class => "img-load"), root_url
+          %p News
+        %td
+          = link_to (image_tag "icons/48x48/photo48.png", :class => "img-load"), root_url
+          %p Photos
+        %td
+          = link_to (image_tag "icons/48x48/video48.png", :class => "img-load"), "#"
+          %p Videos
+
+

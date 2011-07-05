@@ -1,0 +1,9 @@
+= semantic_form_for @feed, :remote => true, :validate => :true, :html => { :multipart => :true } do |f|
+  - f.inputs do
+    = f.input :title
+    = f.input :feed_url
+    =# f.input :category, :as => :select, :collection => Category.where({:category_type => 'F'})
+    = f.input :logo, :as => :file
+    = f.input :remote_logo_url
+
+  = f.buttons

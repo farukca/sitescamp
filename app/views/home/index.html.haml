@@ -1,0 +1,88 @@
+.container_12
+  .grid_8
+    #slider
+      #coda_slider
+        .item
+          #coda-slider-1.coda-slider.preload
+            - for feed in @sliderposts
+              = render 'home/slider_feed', :feed => feed
+            .clear
+          .clear          
+        .clear    
+      #slider_nav
+        #coda-nav-1.coda-nav
+          %ul
+            - for feed in @sliderposts
+              %li{:class => "tab#{@sliderposts.index(feed)}"}
+                - if not feed.images.nil?
+                  = link_to (image_tag feed.images[0], :width => 85, :height => 60), "##{@sliderposts.index(feed)}"
+                - else
+                  = link_to (image_tag "slider_thumb.jpg"), "##{@sliderposts.index(feed)}"
+      .clear
+    .grid_8.alpha.omega
+      .post_columns
+        %h4
+          %span Latest Posts
+        - @feedposts.each_with_index do |recent, index|
+          .column{:class => ("last" if (index+1)%3 == 0)}
+            .image
+              - if not recent.images.nil?
+                = image_tag recent.images[0], :width => 184, :height => 144
+              - else
+                = image_tag "post_column_pic.jpg", :class => "img-load"
+            %h3
+              = link_to (sanitize recent.title), feedpost_path(recent)
+            .date
+              = link_to recent.feed.title, feed_url(recent.feed)
+              /
+              = recent.published.strftime("%m/%d/%Y")
+            .excerpt
+              = sanitize recent.title
+    .grid_8.alpha.omega
+      .grid_4.alpha                
+        .category_list
+          = [1..4].each do |group|
+            %h4
+              %span
+                = link_to "Category #{group}", feeds_path
+            %ul
+              - for grecent in @feedposts
+                %li
+                  .image
+                    = image_tag "category_pic.jpg", :class => "img-load"
+                  .details
+                    %h5
+                      = link_to (sanitize grecent.title), feedpost_path(grecent)
+  .grid_4
+    #sidebar
+      .widget
+        = form_tag search_sites_path, :id => "search-form", :method => 'get' do
+          %span.glass
+            %i
+          = text_field_tag :searchfield, params[:searchfield]
+      .widget
+        .tabs
+          .tab_wrap
+            %ul.nav
+              %li= link_to "Popular", "#tabs-1"
+              %li= link_to "Recent", "#tabs-2"
+              %li= link_to "Read", "#tabs-3"
+              %li= link_to "Follow", "#tabs-4"
+            #tabs-1.tab
+              %ul
+                = render :partial => "feedposts/categoried_post", :locals => { :feedposts => @feedposts }
+            #tabs-2.tab
+              %ul
+                = render :partial => "feedposts/categoried_post", :locals => { :feedposts => @feedposts }
+            #tabs-3.tab
+              %ul
+                = render :partial => "feedposts/categoried_post", :locals => { :feedposts => @feedposts }
+            #tabs-4.tab
+              %ul
+                = render :partial => "feeds/categoried_feed", :locals => { :feeds => @newfeeds }
+      .widget
+        %h4
+          %span 
+            Video
+            .video
+  .clear

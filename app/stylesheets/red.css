@@ -1,0 +1,20 @@
+@charset "utf-8";
+/** Red color scheme 
+
+	a:#d80000
+	button:#ff5555
+
+**/
+
+#content a {color:#d80000;}
+#content .button:hover { background:#ff5555; color:#333333; text-decoration:none;}
+p.tagline {color:#fff !important;}
+#home-page #header {background:url(../images/red/home-bg.jpg) repeat-x top left; height:540px;  position:relative; margin-bottom:10px;}
+#sub-page #header {background:url(../images/red/sub-bg.jpg) repeat-x top left; height:316px;  position:relative; margin-bottom:10px;}
+
+ul.sf-menu {background:url(../images/red/nav-left.png) no-repeat top left;}
+#nav-finish {float:right; background:url(../images/red/nav-right.png) no-repeat top right; width:8px; height:35px;}
+#pagename {height:100px; position:relative; background:url(../images/red/pagename-bg.jpg) no-repeat top left;}
+
+.widget ul li a {background:#fff; border-bottom:#d1d1d1 1px solid; display:block; padding:7px 0 7px 5px; color:#d80000;}
+#latest-posts ul li a {padding:0; color:#d80000; border:none;}

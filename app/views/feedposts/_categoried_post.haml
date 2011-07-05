@@ -1,0 +1,8 @@
+- for post in feedposts
+  %li
+    .image
+      = image_tag post.feed.logo.url, :class => "img-load", :size => "45x45"
+    .details
+      %h5
+        = link_to (sanitize post.title), feedpost_path(post)
+      %span.date= post.published.strftime("%m/%d/%Y")

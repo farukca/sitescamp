@@ -1,0 +1,41 @@
+-#   Copyright (c) 2010, Diaspora Inc.  This file is
+-#   licensed under the Affero General Public License version 3 or later.  See
+-#   the COPYRIGHT file.
+
+- content_for :page_title do
+  = t('.edit_profile')
+
+= form_tag person_path(@person), :method => :put, :multipart => true, :id => 'update_profile_form' do |f|
+  %h3
+    = t('people.edit.your_profile')
+    .description
+      = t('people.edit.info_available_to')
+
+  =# error_messages_for @person
+  = render "shared/error_messages", :target => @person
+
+  %h4
+    = t('people.edit.your_name')
+    = text_field_tag 'person[name]', @person.name, :placeholder => t('people.edit.first_name')
+    = text_field_tag 'person[surname]', @person.surname, :placeholder => t('people.edit.last_name')
+
+  %h4
+    = t('people.edit.your_gender')
+    = text_field_tag 'person[gender]', @person.gender, :placeholder => t("fill_me_out")
+
+  %h4
+    = t('people.edit.your_birthday')
+    = select_date @person.birthdate, :prompt => true
+
+  %h4
+    = t('people.edit.your_bio')
+    = text_area_tag 'person[interest]', @person.interest, :rows => 5, :placeholder => t('fill_me_out')
+
+  %h4
+    =# t('people.edit.your_photo')
+    =# render 'photos/new_profile_photo'
+    %br
+
+  .submit_block
+    =yield(:submit_block)
+

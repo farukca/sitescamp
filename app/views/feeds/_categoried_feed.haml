@@ -1,0 +1,7 @@
+- for feed in feeds
+  %li
+    .image
+      = image_tag feed.logo.url.to_s, :class => "img-load", :size => "45x45"
+    .details
+      %h5
+        = link_to (sanitize feed.title), feed_path(feed)

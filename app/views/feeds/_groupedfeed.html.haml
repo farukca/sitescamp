@@ -1,0 +1,4 @@
+- for f in feeds
+  %li.feedli{:feed_id => f.id}
+    = image_tag ("icons/rss16.png", :class => "img-load")
+    = link_to f.title, "#"

@@ -1,0 +1,3 @@
+$("#groups").prepend("<%= escape_javascript(render(:partial => 'usergroup', :locals => { :usergroup => @group })) %>").accordion('destroy').accordion({ active: false, autoHeight: false });
+
+$("#new_usergroup").reset();

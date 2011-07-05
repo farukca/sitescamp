@@ -1,0 +1,20 @@
+@charset "utf-8";
+/** Green color scheme 
+
+	a:#679814
+	button:#89cb19
+
+**/
+
+#content a {color:#679814;}
+#content .button:hover { background:#89cb19; color:#333333; text-decoration:none;}
+
+#home-page #header {background:url(../images/green/home-bg.jpg) repeat-x top left; height:540px;  position:relative; margin-bottom:10px;}
+#sub-page #header {background:url(../images/green/sub-bg.jpg) repeat-x top left; height:316px;  position:relative; margin-bottom:10px;}
+
+ul.sf-menu {background:url(../images/green/nav-left.png) no-repeat top left;}
+#nav-finish {float:right; background:url(../images/green/nav-right.png) no-repeat top right; width:8px; height:35px;}
+#pagename {height:100px; position:relative; background:url(../images/green/pagename-bg.jpg) no-repeat top left;}
+
+.widget ul li a {background:#fff; border-bottom:#d1d1d1 1px solid; display:block; padding:7px 0 7px 5px; color:#679814;}
+#latest-posts ul li a {padding:0; color:#679814; border:none;}

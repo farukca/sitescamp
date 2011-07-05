@@ -1,0 +1,17 @@
+%h1 Listing Feeds
+
+%table
+  %tr
+    %th Title
+    %th URL
+    %th
+
+- @feeds.each do |feed|
+  %tr
+    %td
+      = feed.title
+    %td
+      = feed.feed_url
+    %td
+      = link_to 'Update', getnews_feed_path(feed)
+      = link_to 'Edit', edit_feed_path(feed)

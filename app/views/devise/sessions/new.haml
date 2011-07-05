@@ -1,0 +1,33 @@
+.container_12
+  .grid_3
+    #left-sidebar.span-5.last
+      %h3
+        Sign in
+  #content.grid_6
+    %h3
+      Login
+    = form_for(resource_name, resource, :url => session_path(resource_name), :id => 'login', :class => 'standard-form') do |f|
+      %ul
+        %li
+          %label.label_name Email Address:
+          .fieldgroup
+            = f.text_field :email
+        %li
+          %label.label_name Password:
+          .fieldgroup
+            = f.password_field :password
+            = link_to "Forgot Password?", new_password_path(resource_name)
+        %li
+          - if devise_mapping.rememberable?
+            %label.label_name Remember me:
+            .fieldgroup
+              = f.check_box :remember_me
+        %li
+          = f.submit "Login", :class => 'button button-gray'
+          %span 
+            or 
+            = link_to "Join Camping", new_user_registration_path
+  .grid_3
+    #right-sidebar.span-5.last
+      %h3
+        Sign in

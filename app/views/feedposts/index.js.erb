@@ -1,0 +1,2 @@
+$("#feedpost-list").html("<%= escape_javascript(render(:partial => 'feedpost_list', :locals => { :feedposts => @feedposts })) %>");
+$(".toggle_container").hide();

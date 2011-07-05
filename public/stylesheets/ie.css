@@ -1,0 +1,13 @@
+/* line 1, ../../app/stylesheets/ie.scss */
+ul#featured_sites li {
+  margin-left: 4px;
+  margin-top: 4px;
+}
+/* line 4, ../../app/stylesheets/ie.scss */
+ul#featured_sites li:hover {
+  padding: 6px;
+}
+/* line 5, ../../app/stylesheets/ie.scss */
+ul#featured_sites li:hover img {
+  width: 240px;
+}

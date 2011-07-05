@@ -1,0 +1,41 @@
+#the_body
+  .container_12
+    .grid_3
+      #sidebar
+        .widget
+          .advert
+            %ul
+              %li{:class => "left"}
+                = link_to (image_tag @site.logo.url.to_s), "#"
+        .widget
+          #feed_details
+            %p
+              Buraya site detayları gelecek
+          #feed_links
+            %ul
+              %li
+                Website
+              %li
+                Twitter
+
+    #archive.grid_7
+      .grid_7.alpha.omega
+        .breadcrumb
+          = @site.name
+        .clear
+      .grid_7.alpha.omega
+        #posts.full_posts
+          %ol
+            = render :partial => "feedposts/categoried_post", :locals => { :feedposts => @feedposts }
+          = paginate @feedposts, :remote => true, :theme => "show_more_theme"
+      .grid_7.alpha.omega
+        #related
+          %h4
+            %span
+              Related Feeds
+              - for rsite in @relatedsites
+                .column
+                  .image
+                    = link_to (image_tag rsite.logo.url.to_s), site_url(rsite)
+                  %h3
+                    = link_to rsite.name, site_url(rsite)

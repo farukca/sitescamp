@@ -1,0 +1,120 @@
+#bottom
+  .container_12
+    .grid_12
+      #nav
+        %ul.sf-menu
+          %li.first= link_to "Home", root_url
+          %li= link_to "Culture", root_url
+          %li= link_to "Travel", root_url
+          %li= link_to "Dropdowns", "#"
+            %ul
+              %li.first= link_to "Dropdown one", "#"
+              %li= link_to "Dropdown two", "#"
+          .clear
+    .clear
+
+#the_body
+  .container_12
+    .grid_8
+      #slider
+        #coda_slider
+          .item
+            #coda-slider-1.coda-slider.preload
+              - for feed in @feedposts
+                = render 'homefeeds', :feed => feed
+              .clear
+            .clear          
+          .clear    
+        #slider_nav
+          #coda-nav-1.coda-nav
+            %ul
+              @feedposts.each_with_index do |feed, index|
+                %li.tab1
+                  = link_to (image_tag feed.images[0], :class => "img-load"), "#{index}"
+        .clear
+      .grid_8.alpha.omega
+        .post_columns
+          %h4
+            %span Latest Posts
+          @recentpost.each do |recent|
+            .column
+              .image
+                = image_tag recent.images[0], :class => "img-load"
+              %h3
+                = link_to recent.title, feedpost_path(recent)
+              .date= recent.published
+              .excerpt
+                %p= recent.summary      
+            .clear
+      .grid_8.alpha.omega
+        .grid_4.alpha                
+          .category_list
+            @usergroups.each do |group|
+              %h4
+                %span
+                  = link_to group.title, group_path(group)
+              %ul
+                group.recentpost.each do |grecent|
+                  %li
+                    .image
+                      = image_tag grecent.images[0], :class => "img-load"
+                    .details
+                      %h5= grecent.title
+    .grid_4
+      #sidebar
+        .widget">
+          = form_tag 
+            = input_tag type="text" name="s" value="to search, type and hit enter">
+        .widget
+          .tabs
+            .tab_wrap
+              %ul.nav
+                %li.first.tab_nav_1
+                  = link_to "Popular", "#tabs-1"
+                %li.tab_nav_2
+                  = link_to "Recent", "#tabs-2
+                %li.tab_nav_3
+                  = link_to "Read", "#tabs-3"
+                %li.last.tab_nav_4
+                  = link_to "Follow", "#tabs-4"
+              #tabs-1.tab
+                %ul
+                  @recentpost.each do |rp|
+                    %li
+                      .image
+                        = image_tag rp.images[0], :class => "img-load"
+                      .details
+                        %h5
+                          = link_to rp.title, feedpost_path(rp)
+                        %span.date= rp.published
+              #tabs-2.tab
+                  @popularpost.each do |pp|
+                    %li
+                      .image
+                        = image_tag pp.images[0], :class => "img-load"
+                      .details
+                        %h5
+                          = link_to pp.title, feedpost_path(pp)
+                        %span.date= pp.published                                   
+              #tabs-3.tab
+                  @readrecommeds.each do |rr|
+                    %li
+                      .image
+                        = image_tag rr.images[0], :class => "img-load"
+                      .details
+                        %h5
+                          = link_to rr.title, feedpost_path(rr)
+                        %span.date= rr.published
+              #tabs-4.tab.tab_tags
+                  @feedrecommeds.each do |fr|
+                    %li
+                      .image
+                        = image_tag fr.logo_url, :class => "img-load"
+                      .details
+                        %h5
+                          = link_to fr.title, feed_path(fr)
+        .widget
+          %h4
+            %span Video
+              .video
+    .clear

@@ -1,0 +1,7 @@
+.span-24.last
+  #mainheader
+    - content_for :page_title do
+      = @person.name
+
+= render :partial => 'people/profile_sidebar', :locals => {:person => @person }
+= render :partial => 'people/profile_content', :locals => {:person => @person }

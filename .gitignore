@@ -1,0 +1,12 @@
+.bundle
+db/*.sqlite3
+log/*.log
+tmp/**/*
+app/stylesheets/**/**
+db/**/**
+public/assets/**/**
+public/feeds/**/**
+public/uploads/**/**
+buglog
+todo
+.git/**/*

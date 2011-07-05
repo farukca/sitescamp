@@ -1,0 +1,4 @@
+%li
+  .span-7
+    =link_to site.name, site_path(site)
+  = link_to (image_tag site.logo.url(:small), :alt => site.desc), site_path(site)

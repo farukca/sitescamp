@@ -1,0 +1,187 @@
+
+body#sub-page
+%header
+  #header.container
+    #top
+      #logo
+        %h1
+		  = link_to (img_tag 'logo.png' :alt => "SitesCamp"), root_url
+      #main-nav
+        %ul.sf-menu
+          %li 
+		    = link_to 'Home', root_url
+              %ul
+                %li
+			      = link_to 'Home', root_url
+                %li
+				  = link_to 'Home - Fading Slider', root_url
+                %li
+				  = link_to 'Home - Fancy Transitions Slider', root_url
+          %li
+			= link_to 'About', root_url
+              %ul
+                %li
+			      = link_to 'Full Width', root_url
+                  %li
+				    = link_to 'Level #3', , root_url
+                      %ul
+                        %li 
+						  = link_to 'Just For', root_url
+                        %li
+						  = link_to 'Purposes', root_url
+
+          %li
+			= link_to 'Services', root_url
+          %li
+			= link_to 'Portfolio', root_url
+              %ul
+                %li
+			      = link_to 'Web Design', root_url
+                %li
+				  = link_to 'Logos', root_url
+          %li
+			= link_to 'Blog', root_url
+              %ul
+                %li
+			      = link_to 'Single Post', root_url
+          %li.current_page_item
+			= link_to 'Contact', root_url
+
+
+<div class="container">
+	<div class="span-24 last">
+		<div class="span-24 last">
+			<div id="mainheader">
+					<h2>Main Window</h2>
+			</div>
+		</div>
+	</div>
+	<div id="left-sidebar" class="span-5">
+		<h4>Gabriel Byrne</h4>
+		<div id="profile" class="widget">
+			<a href="#" class="img-load"><img src="SDDMenu_files/profile3.jpg" alt="Gabriel Byrne" /></a>
+		</div>
+		<div id="profiledets" class="widget">
+			<ul>
+				<li><a href="#">About.me</a></li>
+				<li><a href="#" class="img-load"><img src="SDDMenu_files/dashb.jpg" alt="Wall" />Wall</a></li>
+				<li><a href="#" class="img-load"><img src="SDDMenu_files/details.jpg" alt="Details" />Details</a></li>
+				<li><a href="#" class="img-load"><img src="SDDMenu_files/photos.jpg" alt="Photos" />Photos</a></li>
+				<li><a href="#" class="img-load"><img src="SDDMenu_files/videos2.jpg" alt="Videos" />Videos</a></li>
+			</ul>
+		</div>
+	</div>
+	<div id="content" class="span-14">
+      <div id="main-colum">
+      	<h3>Get in touch with us</h3>
+      	<p>This great template comes with a built-in ajax contact form with validation. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim.</p>
+        <!-- contact-form START here -->
+        <div id="feedback">
+          <p class="error wrong_name"> Fill the correct name</p>
+          <p class="error wrong_email"> Incorrect email</p>
+          <p class="error wrong_message"> Enter your message</p>
+        </div>
+        <form id="contact_us" method="post">
+          <p class="label_name">Name</p>
+          <p class="input_form">
+            <input type="text" name="Name" />
+          </p>
+		  <p id="namehelp" class="button">?</p>
+          <p class="label_name">Email</p>
+          <p class="input_form">
+            <input type="text" name="Email" />
+          </p>
+          <p class="label_name">Message</p>
+          <p class="input_form" id="textarea">
+            <textarea name="Message" rows="2" cols="4" id="message_input"></textarea>
+          </p>
+          <p id="submit">
+            <input type="submit" value="Send" name="submitButton" class="button" />
+          </p>
+        </form>
+        <p id="success">Your message was sent succesfully!</p>
+        <!-- contact-form END here -->
+      </div>
+	</div>
+	<div id="right-sidebar" class="span-5 last">
+		<h4>Right Sidebar</h4>
+		<div class="widget">
+			<div class="inside">
+				<h3>From the posts</h3>
+				<ul>
+					<li> <a href="#">Post title goes here</a>
+					  <p>John Doe on April 10, 2010</p>
+					</li>
+					<li> <a href="#">Post title goes here</a>
+					  <p>John Doe on April 10, 2010</p>
+					</li>
+					<li> <a href="#">Post title goes here</a>
+					  <p>John Doe on April 10, 2010</p>
+					</li>
+				</ul>
+			</div>
+			<div class="inside">
+				<h3>Testimonial</h3>
+				<p>
+					Bakalim sonuç ne olacak,
+					insanlara ona göre fikir verelim.
+				</p>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- site-wrapper END here -->
+<footer>
+	<div id="footer" class="container" style="position: relative;">
+		<div id="container">
+			<div class="footer-widget span-6">
+			  <h3>Pages</h3>
+			  <ul>
+				<li><a href="#">Home</a></li>
+				<li><a href="#">About</a></li>
+				<li><a href="#">Portfolio</a></li>
+				<li><a href="#">Gallery</a></li>
+				<li><a href="#">Blog</a></li>
+				<li><a href="#">Contact</a></li>
+			  </ul>
+			</div>
+			<div class="footer-widget span-6">
+			  <h3>Archives</h3>
+			  <ul>
+				<li><a href="#">Feb 2010</a></li>
+				<li><a href="#">Aprril 2010</a></li>
+				<li><a href="#">December 2009</a></li>
+				<li><a href="#">November 2009</a></li>
+			  </ul>
+			</div>
+			<div class="footer-widget span-6">
+			  <h3>Categories</h3>
+			  <ul>
+				<li><a href="#">General</a></li>
+				<li><a href="#">News</a></li>
+				<li><a href="#">Portfolio</a></li>
+				<li><a href="#">Web Design</a></li>
+				<li><a href="#">Tutorials</a></li>
+				<li><a href="#">Inspiration</a></li>
+				<li><a href="#">Uncategorized</a></li>
+			  </ul>
+			</div>
+			<div class="footer-widget span-6 last">
+			  <h3>All Rights Reserved</h3>
+			  <p>&copy; 2010 All rights reserved to companyname.com. Get in touch with us with one of this social links.</p>
+			  <ul class="social-links">
+				<li><a href="#"><img src="SDDMenu_files/facebook_16.png" alt="" /></a></li>
+				<li><a href="#"><img src="SDDMenu_files/twitter_16.png" alt="" /></a></li>
+				<li><a href="#"><img src="SDDMenu_files/flickr_16.png" alt="" /></a></li>
+				<li><a href="#"><img src="SDDMenu_files/myspace_16.png" alt="" /></a></li>
+				<li><a href="#"><img src="SDDMenu_files/rss_16.png" alt="" /></a></li>
+				<li><a href="#"><img src="SDDMenu_files/skype_16.png" alt="" /></a></li>
+			  </ul>
+			</div>			
+		</div>
+	</div>
+</footer>
+<script type="text/javascript"> Cufon.now(); </script>
+<script type="text/javascript" src="js/init_form.js"></script>
+</body>
+</html>

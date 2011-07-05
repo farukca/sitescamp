@@ -1,0 +1,37 @@
+
+- content_for :head do
+  :javascript
+    $(document).ready(function(){
+      $('.delete').bind('ajax:success', function() {
+        $(this).closest('li').fadeOut(200);
+      });
+      $('.delete').bind('ajax:failure', function() {
+        alert("#{t('.cannot_remove', :name => person.name)}");
+      });
+    });
+
+#left-sidebar.span-5
+  #links.widget
+    %table
+      %tr
+        %td
+          = link_to (image_tag "icons/48x48/rss48.png", :class => "img-load"), root_url
+          %p News
+        %td
+          = link_to (image_tag "icons/48x48/photo48.png", :class => "img-load"), root_url
+          %p Photos
+        %td
+          = link_to (image_tag "icons/48x48/video48.png", :class => "img-load"), "#"
+          %p Videos
+
+  #groups
+    - if @usergroups && @usergroups.count > 0
+      = render :partial => 'usergroup', :collection => @usergroups
+
+    %h3.acc_trigger
+      = link_to "Add Group", "#"
+    %ul{:id => "newgroup"}
+      %li
+        = form_tag addgroup_person_path, :id => "new_usergroup", :method => 'get' do
+          = text_field_tag :group, params[:group], :size => "15"
+          = submit_tag "Add Group", :name => nil, :class => "button"
