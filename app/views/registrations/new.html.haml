@@ -6,7 +6,7 @@
   #content.grid_6
     %h3
       Join Sitescamp
-    = form_for(resource, :as => resource_name, :url => session_path(resource_name), :id => 'signup', :class => 'standard-form') do |f|
+    = form_for(resource, :as => resource_name, :url => registration_path(resource_name), :id => 'signup', :class => 'standard-form') do |f|
       %ul
         %li
           %label.label_name

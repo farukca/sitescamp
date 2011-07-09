@@ -32,7 +32,7 @@ gem 'bson_ext', '~> 1.3'
 gem 'mongoid_taggable'
 
 gem 'haml'
-gem 'compass', '>= 0.10.6'
+#gem 'compass', '>= 0.10.6'
 
 gem 'formtastic'
 gem 'client_side_validations'
