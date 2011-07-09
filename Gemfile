@@ -41,7 +41,7 @@ gem 'kaminari'
 gem 'ruby-readability', :require => 'readability'
 gem 'sem_extractor', :git => 'git://github.com/apneadiving/SemExtractor.git'
 gem 'auto_excerpt'
-gem 'summarize'
+#gem 'summarize'
 
 #authentication
 gem 'devise', '1.1.5'
