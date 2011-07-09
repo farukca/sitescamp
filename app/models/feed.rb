@@ -20,7 +20,7 @@ class Feed
   references_many :feedposts
   references_many :groupfeeds
   referenced_in :category
-  referenced_in :channel
+  #referenced_in :channel
 
   attr_accessible :title, :site_url, :feed_url, :logo, :remote_logo_url
 

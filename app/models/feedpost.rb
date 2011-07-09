@@ -97,24 +97,26 @@ class Feedpost
       end
     end
 
-    self.content = strText
-    links = []
-    strText.scan(/href\s*=\s*\"*[^\">]*/i) do |link|
-      link = link.sub(/href="/i, "")
-      if not link.to_s.blank?
-        begin
-          uri = URI.parse(URI.encode(link))
-          if feedSite != uri.host
-            self.analyze_links(link)
-          end
-          links << link
-        rescue URI::InvalidURIError
+    unless strText.nil?
+      self.content = strText
+      links = []
+      strText.scan(/href\s*=\s*\"*[^\">]*/i) do |link|
+        link = link.sub(/href="/i, "")
+        if not link.to_s.blank?
+          begin
+            uri = URI.parse(URI.encode(link))
+            if feedSite != uri.host
+              self.analyze_links(link)
+            end
+            links << link
+          rescue URI::InvalidURIError
 #TODO burada hata mesajını bir tabloya kaydedebiliriz, current_user, tarih, hata aldığı model,controller ismi ve method ismi alanlar ile
-          puts link
-        end
-      end      
+            puts link
+          end
+        end      
+      end
+      self.sublinks = links
     end
-    self.sublinks = links
     self.save!     
   end
   handle_asynchronously :get_from_diffbot, :priority => 30

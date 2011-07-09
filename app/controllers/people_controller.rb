@@ -19,7 +19,9 @@ class PeopleController < ApplicationController
     #debugger
     if not str_ids.blank?
       #@feedposts = Feedpost.only(:id,:feed_id,:title,:content,:author,:published,:images).any_in(:feed_id => str_ids).limit(20).descending(:published).paginate(:per_page => 6, :page => params[:page])
-      @feedposts = Feedpost.recents.postsbyfeeds(str_ids).descending("published").page params[:page]
+      @sliderposts = Feedpost.postsbyfeeds(str_ids).only(:id,:feed_id,:title,:author,:published,:images).order_by(:published, :desc).limit(6).cache
+      @feedposts = Feedpost.recents.postsbyfeeds(str_ids).only(:id,:feed_id,:title,:author,:published,:images).order_by(:published, :desc).skip(6).limit(6).cache
+    #.page params[:page]
     end
 
     #other feeds

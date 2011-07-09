@@ -1,43 +1,8 @@
 .container_12
   .grid_8
-    #slider
-      #coda_slider
-        .item
-          #coda-slider-1.coda-slider.preload
-            - for feed in @feedposts
-              = render 'home/slider_feed', :feed => feed
-            .clear
-          .clear          
-        .clear    
-      #slider_nav
-        #coda-nav-1.coda-nav
-          %ul
-            - for feed in @feedposts
-              %li{:class => "tab#{@feedposts.index(feed)}"}
-                - if not feed.images.nil?
-                  = link_to (image_tag feed.images[0], :width => 85, :height => 60), "##{@feedposts.index(feed)}"
-                - else
-                  = link_to (image_tag "slider_thumb.jpg"), "##{@feedposts.index(feed)}"
-      .clear
+    = render 'home/slider', :sliderposts => @sliderposts
     .grid_8.alpha.omega
-      .post_columns
-        %h4
-          %span Latest Posts
-        - @feedposts.each_with_index do |recent, index|
-          .column{:class => ("last" if (index+1)%3 == 0)}
-            .image
-              - if not recent.images.nil?
-                = image_tag recent.images[0], :width => 184, :height => 144
-              - else
-                = image_tag "post_column_pic.jpg", :class => "img-load"
-            %h3
-              = link_to (sanitize recent.title), feedpost_path(recent)
-            .date
-              = link_to recent.feed.title, feed_url(recent.feed)
-              /
-              = recent.published.strftime("%m/%d/%Y")
-            .excerpt
-              = sanitize recent.title
+      = render 'home/latest', :feedposts => @feedposts
 
     .grid_8.alpha.omega
       .grid_4.alpha                

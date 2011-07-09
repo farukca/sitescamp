@@ -1,0 +1,19 @@
+#slider
+  #coda_slider
+    .item
+      #coda-slider-1.coda-slider.preload
+        - for feed in sliderposts
+          = render 'home/slider_feed', :feed => feed
+        .clear
+      .clear          
+    .clear    
+  #slider_nav
+    #coda-nav-1.coda-nav
+      %ul
+        - for feed in sliderposts
+          %li{:class => "tab#{sliderposts.index(feed)}"}
+            - if not feed.images.nil?
+              = link_to (image_tag feed.images[0], :width => 85, :height => 60), "##{sliderposts.index(feed)}"
+            - else
+              = link_to (image_tag "slider_thumb.jpg"), "##{sliderposts.index(feed)}"
+  .clear
