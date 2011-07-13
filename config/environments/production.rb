@@ -23,6 +23,7 @@ Sitescamp::Application.configure do
 
   # Use a different logger for distributed setups
   # config.logger = SyslogLogger.new
+  config.logger = Logger.new(config.paths.log.first, 'daily')
 
   # Use a different cache store in production
   # config.cache_store = :mem_cache_store
@@ -46,4 +47,5 @@ Sitescamp::Application.configure do
 
   # Send deprecation notices to registered listeners
   config.active_support.deprecation = :notify
+  
 end

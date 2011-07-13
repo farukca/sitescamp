@@ -112,7 +112,7 @@ class Feed
   #handle_asynchronously :set_icon_from_diffbot, :priority => 50
 
   def self.select_to_update
-    feeds = Feed.find(:all)
+    feeds = Feed.where(:status => 'A')
     feeds.each do |feed|
       feed.get_new_entries(feed)
     end

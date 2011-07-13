@@ -24,13 +24,14 @@ class FeedsController < ApplicationController
       @feed.get_entries(@feed)
     end
 
-    @person = current_user.person
+    if current_user
+      @person = current_user.person
 
-    if not @person.check_person_source("F", @feed.id)
-      @person.add_feed_to_follow(@feed)
+      if not @person.check_person_source("F", @feed.id)
+        @person.add_feed_to_follow(@feed)
+      end
     end
     #update_from_feed(@feed.feed_url)
-    #respond_with @feed, :location => root_url, :notice => "New source has been created"
     
     respond_with @feed, :notice => "New source has been created"
   end 

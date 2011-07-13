@@ -17,7 +17,12 @@ class PeopleController < ApplicationController
     # source feeds entries
     str_ids = @person.person_source_ids("F")
     #debugger
-    if not str_ids.blank?
+    if str_ids.blank?
+      #user does not have feed to follow, this time it will work like home index controller
+      @sliderposts = Feedpost.with_images.only(:id,:feed_id,:title,:author,:published,:images).order_by(:published, :desc).limit(6).cache
+      @feedposts = Feedpost.with_images.only(:id,:feed_id,:title,:author,:published,:images).order_by(:published, :desc).skip(6).limit(6).cache
+      @newfeeds = Feed.where(:status => 'A').descending(:created_at).limit(10)
+    else
       #@feedposts = Feedpost.only(:id,:feed_id,:title,:content,:author,:published,:images).any_in(:feed_id => str_ids).limit(20).descending(:published).paginate(:per_page => 6, :page => params[:page])
       @sliderposts = Feedpost.postsbyfeeds(str_ids).only(:id,:feed_id,:title,:author,:published,:images).order_by(:published, :desc).limit(6).cache
       @feedposts = Feedpost.recents.postsbyfeeds(str_ids).only(:id,:feed_id,:title,:author,:published,:images).order_by(:published, :desc).skip(6).limit(6).cache
@@ -30,7 +35,7 @@ class PeopleController < ApplicationController
 
     # source people entries
     str_ids = @person.person_source_ids("P")
-    if not str_ids.blank?
+    unless str_ids.blank?
       @posts = Post.any_in(:person_id => str_ids)
     end
 

@@ -18,6 +18,6 @@
 # end
 
 # Learn more: http://github.com/javan/whenever
-every 10.minutes do
-  runner "Feed.select_to_update", :environment => :development
+every 2.hours do
+  runner "Feed.select_to_update"
 end
