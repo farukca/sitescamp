@@ -1411,6 +1411,8 @@ label.error{
 
 #content img{
 	margin: 0 0 30px 0;
+        margin-right:10px;
+	float:left;
 }
 
 #content ul li{
@@ -1434,7 +1436,7 @@ label.error{
 }
 
 #content p{
-	font-size:12px;
+	font-size:13px;
 	line-height:22px;
 	margin:0 0 30px 0;
 }
