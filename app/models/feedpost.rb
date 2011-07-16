@@ -57,26 +57,26 @@ class Feedpost
   def get_from_diffbot
     response = Net::HTTP.get(URI.parse("http://www.diffbot.com/api/article?token=72c1f018e28409e24883ef98039da6ab&tags&html&summary&stats&url="+self.url))
     
-    strIcon = JSON.parse(response.to_s)['icon']
+    #strIcon = JSON.parse(response.to_s)['icon']
+    strSummary = JSON.parse(response.to_s)['summary']
+    unless strSummary.nil?
+        self.summary = AutoExcerpt.new(strSummary, {:strip_html => true, :allowed_tags => %w(p), :characters => 200, :ending => nil})
+    end
+   
+    strTags    = JSON.parse(response.to_s)['tags']
+    unless strTags.nil?
+      self.tags ||= Array.new
+      self.tags << strTags
+      #analyze_tags(strTags)
+    end
 
-    strText = JSON.parse(response.to_s)['html']
-    strLink = JSON.parse(response.to_s)['media']
-    self.realurl  = JSON.parse(response.to_s)['resolved_url']
-    self.tags = Array.new
-    self.tags = JSON.parse(response.to_s)['tags']
-
+    strURL     = JSON.parse(response.to_s)['resolved_url']
+    unless strURL.nil?
+      self.realurl  = strURL.sanitize.downcase
+    end
+    
+    strLink    = JSON.parse(response.to_s)['media']
     if not strLink.nil?
-
-      strUrl = self.realurl
-      if not strUrl.nil?
-        begin
-          uri = URI.parse(URI.encode(strUrl))
-          feedSite = uri.host
-        rescue URI::InvalidURIError
-          feedSite = ""
-        end
-      end if
-
       imgArr = Array.new
       vidArr = Array.new
       i = 0;
@@ -97,15 +97,34 @@ class Feedpost
       end
     end
 
+    strText    = JSON.parse(response.to_s)['html']
     unless strText.nil?
+
+      feedUrl = self.realurl
+      if feedUrl.nil? 
+        feedUrl = self.url
+      end
+
+      if not feedUrl.nil?
+        begin
+          uri = URI.parse(URI.encode(feedUrl))
+          feedSite = uri.host
+          feedSite["www."] = ""
+        rescue URI::InvalidURIError
+          feedSite = ""
+        end
+      end if
+
       self.content = strText
       links = []
       strText.scan(/href\s*=\s*\"*[^\">]*/i) do |link|
         link = link.sub(/href="/i, "")
-        if not link.to_s.blank?
+
+        unless link.nil?
           begin
             uri = URI.parse(URI.encode(link))
-            if feedSite != uri.host
+            #if feedSite != uri.host
+            unless link.include? feedSite.to_s
               self.analyze_links(link)
             end
             links << link

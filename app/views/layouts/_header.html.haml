@@ -14,3 +14,16 @@
           - else
             = link_to "Sign up", new_user_registration_path
             = link_to "Sign in", new_user_session_path
+
+
+            %li
+              = link_to "Add Site", "#", :class => "has-popupballoon button button-blue"
+              .popupballoon.top
+                %h5 Add new site
+                = semantic_form_for Site.new, :remote => true, :validate => :true, :html => { :multipart => :true } do |f|
+                  - f.inputs do
+                    = f.input :website, :label => "Website"
+                  = f.buttons do
+                    = f.commit_button :button_html => { :class => "orange", :disable_with => 'Wait...' }
+                    %li.cancel
+                      = link_to "Cancel", "#", :class => "buttons gray close"

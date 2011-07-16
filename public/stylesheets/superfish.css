@@ -57,7 +57,7 @@ ul.sf-menu li li li.sfHover ul {
 }
 
 /*** DEMO SKIN ***/
-ul.sf-menu {
+/*ul.sf-menu {
 font-family: "Lucida Sans Unicode", "Lucida Grande", Garuda, sans-serif; 
 text-transform: capitalize; 
 font-size:11px;
@@ -67,7 +67,7 @@ list-style-type:none;
 list-style-position:outside; 
 text-transform:uppercase;
 padding-left:8px;
-}
+}*/
 .sf-menu li a {
 	display:block;
 	text-decoration:none; 

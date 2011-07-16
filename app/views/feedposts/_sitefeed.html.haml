@@ -1,8 +1,13 @@
-- sitefeeds.each do |sf|
-  %li
-    .image
-      = image_tag sf.site.logo.url.to_s, :class => "img-load", :size => "45x45"
-    .details
-      %h5
-        = link_to sf.site.name, site_path(sf)
-      %span.date= sf.links
+- unless sitefeeds.nil?
+  - sitefeeds.each do |sf|
+    %li
+      .image
+        = image_tag sf.site.logo.url.to_s, :class => "img-load", :size => "45x45"
+      .details
+        %h5
+          = link_to sf.site.name, site_path(sf.site)
+        %span.date
+          - unless sf.links.nil?
+            - sf.links.each do |link|
+              = link_to (link.to_s[0..30]+"..."), link, :alt => link, :target => "_blank"
+              %br

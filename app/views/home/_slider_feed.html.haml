@@ -1,6 +1,6 @@
 .panel
   .slider_image
-    - if not feed.images.nil?
+    - unless feed.images.nil?
       = image_tag feed.images[0], :width => 270, :height => 275
     - else
       = image_tag "slider_pic_large.jpg"
@@ -10,7 +10,8 @@
     .header
       %h2= link_to (sanitize feed.title), feedpost_path(feed)
     .date
-      = feed.published
+      = feed.published.strftime("%m/%d/%Y")
     .excerpt
       %p
-        =# sanitize feed.summary
+        = sanitize feed.summary
+        

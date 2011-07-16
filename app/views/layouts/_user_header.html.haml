@@ -8,10 +8,10 @@
 
         #global-nav
           %ul 
+            %li#global-nav-home
+              = link_to "Home", root_url
             %li
-              = link_to "#", :class => "has-popupballoon button button-blue" do
-                %span.add
-                Add Feed
+              = link_to "Add Feed", "#", :class => "has-popupballoon"
               .popupballoon.top
                 %h5 Add new source
                 = semantic_form_for Feed.new, :remote => true, :validate => :true, :html => { :multipart => :true } do |f|
@@ -21,21 +21,6 @@
                     = f.commit_button :button_html => { :class => "orange", :disable_with => 'Wait...' }
                     %li.cancel
                       = link_to "Cancel", "#", :class => "button gray close"
-            %li
-              = link_to "#", :class => "has-popupballoon button button-blue" do
-                %span.add
-                Add Site
-              .popupballoon.top
-                %h5 Add new site
-                = semantic_form_for Site.new, :remote => true, :validate => :true, :html => { :multipart => :true } do |f|
-                  - f.inputs do
-                    = f.input :website, :label => "Website"
-                  = f.buttons do
-                    = f.commit_button :button_html => { :class => "orange", :disable_with => 'Wait...' }
-                    %li.cancel
-                      = link_to "Cancel", "#", :class => "buttons gray close"
-            %li#global-nav-home
-              = link_to "Home", root_url
             - if user_signed_in?
               %li#global-nav-profile
                 = link_to "Profile", profile_person_path(current_user.person)

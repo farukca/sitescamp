@@ -17,13 +17,7 @@ class FeedpostsController < ApplicationController
 
   def show
     @feedpost = Feedpost.find(params[:id])
-    if @feedpost.content.to_s.blank?
-       response = Net::HTTP.get(URI.parse("http://www.diffbot.com/api/article?token=72c1f018e28409e24883ef98039da6ab&tags&html&summary&comments&stats&url="+@feedpost.url))
-    #strIcon = JSON.parse(response.to_s)['comments']
-    #strLink = JSON.parse(response.to_s)['media']
-      @feedpost.content = JSON.parse(response.to_s)['html']
-      debugger
-    end    
+
     @relatedfeeds = Feedpost.recents.limit(4)
     @postsites = Sitefeed.where(:feedpost_id => @feedpost.id)
     #debugger

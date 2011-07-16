@@ -11,4 +11,4 @@
       =# link_to 'Keys', generatekeys_feedpost_path(feedpost)
       =# link_to 'Say', read_feedpost_path(feedpost)
       .author
-        = link_to "#{feedpost.author} / #{feedpost.feed.title} / #{feedpost.published}", feedpost_path(feedpost), :class => "author"
+        = link_to "#{feedpost.author} / #{feedpost.feed.title} / #{feedpost.published.strftime("%m/%d/%Y")}", feedpost_path(feedpost), :class => "author"

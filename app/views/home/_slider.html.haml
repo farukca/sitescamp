@@ -12,7 +12,7 @@
       %ul
         - for feed in sliderposts
           %li{:class => "tab#{sliderposts.index(feed)}"}
-            - if not feed.images.nil?
+            - unless feed.images.nil?
               = link_to (image_tag feed.images[0], :width => 85, :height => 60), "##{sliderposts.index(feed)}"
             - else
               = link_to (image_tag "slider_thumb.jpg"), "##{sliderposts.index(feed)}"

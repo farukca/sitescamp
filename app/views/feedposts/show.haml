@@ -4,7 +4,7 @@
       .breadcrumb
         = link_to "Home", root_url
         = link_to "World News", feed_url(@feedpost.feed)
-        = @feedpost.title
+        = sanitize @feedpost.title
       .description
         %h1= sanitize @feedpost.title
       .meta
@@ -18,17 +18,18 @@
       #author
     .grid_8.alpha.omega
       #related
-        %h4
-          %span Related Posts
-        - @relatedfeeds.each_with_index do |rfeed, index|
-          .column{:class => ("last" if index == 3)}
-            .image
-              - if not rfeed.images.nil? 
-                = link_to (image_tag rfeed.images[0], :width => 100, :height => 100), feedpost_url(rfeed)
-              - else
-                = image_tag "post_column_pic.jpg", :class => "img-load", :width => 100, :height => 100
-            %h3
-              = link_to (sanitize rfeed.title), feedpost_url(rfeed)
+        - unless @relatedfeeds.nil?
+          %h4
+            %span Related Posts
+          - @relatedfeeds.each_with_index do |rfeed, index|
+            .column{:class => ("last" if index == 3)}
+              .image
+                - if not rfeed.images.nil? 
+                  = link_to (image_tag rfeed.images[0], :width => 100, :height => 100), feedpost_url(rfeed)
+                - else
+                  = image_tag "post_column_pic.jpg", :class => "img-load", :width => 100, :height => 100
+              %h3
+                = link_to (sanitize rfeed.title), feedpost_url(rfeed)
   .grid_4
     #sidebar
       .widget
@@ -52,9 +53,9 @@
                 
             #tabs-4.tab.tab_tags
               %ul
-                - if not @feedpost.tags.nil?
+                - unless @feedpost.tags.nil?
                   = render :partial => "feedposts/tags", :locals => { :tags => @feedpost.tags }
-      - if not @feedpost.videos.nil?
+      - unless @feedpost.videos.nil?
         .widget
           %h4
             %span Video
@@ -64,9 +65,10 @@
       .widget
         %h4
           %span Images
-        .flickr          
-          - @feedpost.images.each_with_index do |img, i|
-            .img-load
-              = link_to (image_tag "#{img.to_s}"), img.to_s
+        - unless @feedpost.images.nil?
+          .flickr          
+            - @feedpost.images.each_with_index do |img, i|
+              .img-load
+                = link_to (image_tag "#{img.to_s}"), img.to_s
   .clear
 
