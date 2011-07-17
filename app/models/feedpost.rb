@@ -34,7 +34,7 @@ class Feedpost
       uri = URI.parse(URI.encode(link))
       strHost = uri.host
       unless strHost.nil?
-        if !strHost.index('www.').nil?
+        unless strHost.index('www.').nil?
            strHost["www."] = ""
         end
         site = Site.find_or_create_by(website: strHost)
@@ -109,7 +109,9 @@ class Feedpost
         begin
           uri = URI.parse(URI.encode(feedUrl))
           feedSite = uri.host
-          feedSite["www."] = ""
+          unless feedSite.index('www.').nil?
+            feedSite["www."] = ""
+          end
         rescue URI::InvalidURIError
           feedSite = ""
         end

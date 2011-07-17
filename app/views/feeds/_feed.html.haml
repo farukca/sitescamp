@@ -1,4 +1,4 @@
 %li{:feed_id => feed.id}
-  = image_tag ("icons/rss16.png", :class => "img-load")
+  = image_tag feed.logo.url, :class => "img-load", :size => "45x45"
   = link_to feed.title, "#"
 

@@ -26,7 +26,8 @@
       #posts.full_posts
         %ol
           = render :partial => "feedposts/categoried_post", :locals => { :feedposts => @feedposts }
-        = paginate @feedposts, :remote => true, :theme => "show_more_theme"
+        #paginator
+          = paginate @feedposts, :remote => true, :theme => "show_more_theme"
     .grid_9.alpha.omega
       #related
         %h4

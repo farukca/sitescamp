@@ -1,17 +1,41 @@
-%h1 Listing Feeds
+.container_12
+  .grid_8.alpha.omega
+    %h1 Listing Feeds
+    .category_list
+      %ul.nav
+        - @feeds.each_with_index do |feed, index|
+          %li
+            .image
+              = image_tag feed.logo.url, :class => "img-load", :size => "45x45"
+            .details
+              %h5
+                = link_to feed.title, feed_path(feed)
+            .icons
+              = link_to 'Update', getnews_feed_path(feed)
+              = link_to 'Edit', edit_feed_path(feed)
+  .grid_4
+    #sidebar
+      .widget
+        .tabs
+          .tab_wrap
+            %ul.nav
+              %li= link_to "Popular", "#tabs-1"
+              %li= link_to "Recent", "#tabs-2"
+              %li= link_to "Read", "#tabs-3"
+            #tabs-1.tab
+              %ul
+                - @feeds.each_with_index do |feed, index|
+                  = render :partial => "feed", :locals => { :feed => feed }
+            #tabs-2.tab
+              %ul
+                - @feeds.each_with_index do |feed, index|
+                  = render :partial => "feed", :locals => { :feed => feed }
+            #tabs-3.tab
+              %ul
+                - @feeds.each_with_index do |feed, index|
+                  = render :partial => "feed", :locals => { :feed => feed }
+      .widget
+        %h4
+          %span 
 
-%table
-  %tr
-    %th Title
-    %th URL
-    %th
-
-- @feeds.each do |feed|
-  %tr
-    %td
-      = feed.title
-    %td
-      = feed.feed_url
-    %td
-      = link_to 'Update', getnews_feed_path(feed)
-      = link_to 'Edit', edit_feed_path(feed)
+  .clear

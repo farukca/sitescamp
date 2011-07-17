@@ -1,0 +1,2 @@
+$('#posts ol').append("<%= escape_javascript(render(:partial => 'feedposts/categoried_post', :locals => { :feedposts => @feedposts })) %>");
+$('#paginator').html('<%= escape_javascript(paginate(@feedposts, :remote => true, :theme => 'show_more_theme').to_s) %>');

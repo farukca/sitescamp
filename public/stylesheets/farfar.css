@@ -28,13 +28,13 @@
 #session a:hover{text-decoration:none!important;}
 #session img{display:inline-block;vertical-align:middle;width:20px;height:20px;margin-top:-4px;margin-right:6px;border:none;cursor:pointer;}
 #session .promotional{color:black;padding:3px 6px 3px 5px;font-size:12px;-moz-border-radius:3px;-webkit-border-radius:3px;-moz-box-shadow:0 1px 0 #000;-webkit-box-shadow:0 1px 0 #000;border:0;margin-top:-2px;outline:none;}
-#search-form{float:left;margin:0;opacity:1;position:relative;}
-#search-form #searchfield{border:1px solid black;-moz-border-radius:4px;-webkit-border-radius:4px;font:13px Arial,sans-serif;width:215px;padding:6px 25px 4px 6px;color:#ccc;background:#666;-webkit-box-shadow:0 1px 0 #444;-moz-box-shadow:0 1px 0 #444;box-shadow:0 1px 0 #444;}
-#search-form #searchfield:hover{background:#777;color:#fff;}
+#search-form{float:left;margin:0 0 0 10px;opacity:1;position:relative;}
+#search-form #searchfield{border:1px solid black;-moz-border-radius:4px;-webkit-border-radius:4px;width:250px;padding:6px 25px 4px 6px;background:#666;-webkit-box-shadow:0 1px 0 #444;-moz-box-shadow:0 1px 0 #444;box-shadow:0 1px 0 #444;}
+#search-form #searchfield:hover{background:#777}
 #search-form span.glass{display:block;position:absolute;cursor:pointer;display:block;right:0;padding:8px 8px 5px 8px;}
 #search-form span.glass i{background-image:url(/images/sprite-icons.png);background-position:-224px -96px;width:14px;height:14px;display:block;font-size:0;}
 #search-form #searchfield:focus,
-#search-form #searchfield.focused{outline:none;background:#eee;color:#333;text-shadow:0 1px 0 #fff;border:1px solid #eee;-webkit-box-shadow:0 0 3px #000;-moz-box-shadow:0 0 3px #000;}
+#search-form #searchfield.focused{outline:none;background:#eee;border:1px solid #eee;-webkit-box-shadow:0 0 3px #000;-moz-box-shadow:0 0 3px #000;}
 #top-bar .dropdown{clear:both;position:absolute;right:0;z-index:0;top:-999px;-webkit-border-bottom-right-radius:5px;-webkit-border-bottom-left-radius:5px;-moz-border-radius-bottomright:5px;-moz-border-radius-bottomleft:5px;border-bottom-right-radius:5px;border-bottom-left-radius:5px;background:#121212;box-shadow:0 2px 2px rgba(0,0,0,0.6);-moz-box-shadow:0 2px 2px rgba(0,0,0,0.6);-webkit-box-shadow:0 2px 2px rgba(0,0,0,0.6);zoom:1;_width:200px;}
 #top-bar .active .dropdown{top:40px;}
 #top-bar ul.user-dropdown{max-height:350px;overflow-x:hidden;width:152px;}
