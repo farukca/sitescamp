@@ -9,6 +9,7 @@ $(document).ready(function() {
   var currPage = 1;
 
   $("a[rel*=facebox]").facebox();
+  $("a[rel^='prettyPhoto']").prettyPhoto({show_title: false, deeplinking: false});
   $("#new_post").submit(function() {
     $.post($(this).attr("action"), $(this).serialize(), null, "script");
     return false;

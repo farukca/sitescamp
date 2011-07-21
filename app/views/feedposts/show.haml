@@ -2,13 +2,11 @@
   #archive.grid_8
     .grid_8.alpha.omega
       .breadcrumb
-        = link_to "Home", root_url
-        = link_to "World News", feed_url(@feedpost.feed)
-        = sanitize @feedpost.title
+        =# sanitize @feedpost.title
       .description
         %h1= sanitize @feedpost.title
       .meta
-        Written by #{@feedpost.author}, on #{@feedpost.published}, about #{@feedpost.categories}
+        Written by #{@feedpost.author}, on #{@feedpost.published.strftime("%m/%d/%Y")}, about #{@feedpost.categories}
       .clear
     .grid_8.alpha.omega
       #content.alignleft
@@ -57,18 +55,19 @@
                   = render :partial => "feedposts/tags", :locals => { :tags => @feedpost.tags }
       - unless @feedpost.videos.nil?
         .widget
-          %h4
-            %span Video
-          .video
-            = image_tag "video.jpg", :alt => "Video"
+          - unless @feedpost.videos.nil?
+            %h4
+              %span Videos
+            - @feedpost.videos.each_with_index do |vid, i|
+              %iframe.video{:src => vid.to_s}
       
       .widget
-        %h4
-          %span Images
         - unless @feedpost.images.nil?
+          %h4
+            %span Images
           .flickr          
             - @feedpost.images.each_with_index do |img, i|
               .img-load
-                = link_to (image_tag "#{img.to_s}"), img.to_s
+                = link_to (image_tag "#{img.to_s}"), img.to_s, :rel => "prettyPhoto[pp_gal]"
   .clear
 

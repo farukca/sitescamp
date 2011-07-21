@@ -1,3 +1,12 @@
+/*!
+ * Rails 3 Client Side Validations - v3.0.5
+ * https://github.com/bcardarlela/client_side_validations
+ *
+ * Copyright (c) 2011 Brian Cardarella
+ * Licensed under the MIT license
+ * http://www.opensource.org/licenses/mit-license.php
+ */
+
 (function($) {
   $.fn.validate = function() {
     return this.filter('form[data-validate]').each(function() {
@@ -6,8 +15,8 @@
 
       // Set up the events for the form
       form
-        .submit(function() { return form.isValid(); })
-        .bind('ajax:beforeSend',      function()          { return form.isValid(); })
+        .submit(function() { return form.isValid(settings.validators); })
+        .bind('ajax:beforeSend',      function()          { return form.isValid(settings.validators); })
         // Callbacks
         .bind('form:validate:after',  function(eventData) { clientSideValidations.callbacks.form.after( form, eventData); })
         .bind('form:validate:before', function(eventData) { clientSideValidations.callbacks.form.before(form, eventData); })
@@ -15,8 +24,8 @@
         .bind('form:validate:pass',   function(eventData) { clientSideValidations.callbacks.form.pass(  form, eventData); })
 
         // Set up the events for each validatable form element
-        .find('[data-validators]:input')
-          .live('focusout',                function()          { $(this).isValid(); })
+        .find('[data-validate]:input')
+          .live('focusout',                function()          { $(this).isValid(settings.validators); })
           .live('change',                  function()          { $(this).data('changed', true); })
           // Callbacks
           .live('element:validate:after',  function(eventData) { clientSideValidations.callbacks.element.after( $(this), eventData); })
@@ -32,20 +41,22 @@
               removeError(element);
             }, eventData) })
         // Checkboxes - Live events don't support filter
-        .end().find('[data-validators]:checkbox')
-          .live('click', function() { $(this).isValid(); })
+        .end().find('[data-validate]:checkbox')
+          .live('click', function() { $(this).isValid(settings.validators); })
         // Inputs for confirmations
         .end().find('[id*=_confirmation]').each(function() {
           var confirmationElement = $(this),
-              element = form.find('#' + this.id.match(/(.+)_confirmation/)[1] + '[data-validators]:input');
+              element = form.find('#' + this.id.match(/(.+)_confirmation/)[1] + '[data-validate]:input');
 
-          $('#' + confirmationElement.attr('id'))
-            .live('focusout', function() {
-              element.data('changed', true).isValid();
-            })
-            .live('keyup', function() {
-              element.data('changed', true).isValid();
-            })
+          if (element[0]) {
+            $('#' + confirmationElement.attr('id'))
+              .live('focusout', function() {
+                element.data('changed', true).isValid(settings.validators);
+              })
+              .live('keyup', function() {
+                element.data('changed', true).isValid(settings.validators);
+              })
+          }
         });
 
       var addError = function(element, message) {
@@ -58,19 +69,19 @@
     });
   }
 
-  $.fn.isValid = function() {
+  $.fn.isValid = function(validators) {
     if ($(this[0]).is('form')) {
-      return validateForm($(this[0]));
+      return validateForm($(this[0]), validators);
     } else {
-      return validateElement($(this[0]));
+      return validateElement($(this[0]), validators[this[0].name]);
     }
   }
 
-  var validateForm = function(form) {
+  var validateForm = function(form, validators) {
     var valid = true;
 
-    form.trigger('form:validate:before').find('[data-validators]:input').each(function() {
-      if (!validateElement($(this))) { valid = false; }
+    form.trigger('form:validate:before').find('[data-validate]:input').each(function() {
+      if (!$(this).isValid(validators)) { valid = false; }
     });
 
     if (valid) {
@@ -83,12 +94,11 @@
     return valid;
   }
 
-  var validateElement = function(element) {
+  var validateElement = function(element, validators) {
     element.trigger('element:validate:before');
 
     if (element.data('changed') !== false) {
-      var valid = true,
-          validators = new Function("return " + element.attr('data-validators'))();
+      var valid = true;
       element.data('changed', false);
 
       // Because 'length' is defined on the list of validators we cannot call jQuery.each on
@@ -119,7 +129,7 @@ var clientSideValidations = {
     all: function() { return jQuery.extend({}, clientSideValidations.validators.local, clientSideValidations.validators.remote) },
     local: {
       presence: function(element, options) {
-        if (/^\s*$/.test(element.val())) {
+        if (/^\s*$/.test(element.val() || "")) {
           return options.message;
         }
       },
@@ -163,7 +173,7 @@ var clientSideValidations = {
           equal_to: '==', less_than: '<', less_than_or_equal_to: '<=' }
 
         for (var check in CHECKS) {
-          if (options[check] && !(new Function("return " + element.val() + CHECKS[check] + options[check])())) {
+          if (options[check] != undefined && !(new Function("return " + element.val() + CHECKS[check] + options[check])())) {
             return options.messages[check];
           }
         }
@@ -183,7 +193,7 @@ var clientSideValidations = {
         } else if (options.minimum) {
           blankOptions.message = options.messages.minimum;
         }
-        if ((message = this.presence(element, blankOptions)) && options.allow_blank == true && !options.maximum) {
+        if ((message = this.presence(element, blankOptions)) && options.allow_blank == true) {
           return;
         } else if (message) {
           return message;
@@ -199,19 +209,22 @@ var clientSideValidations = {
           }
         }
       },
-      confirmation: function(element, options) {
-        if (element.val() != jQuery('#' + element.attr('id') + '_confirmation').val()) {
-          return options.message;
-        }
-      },
       exclusion: function(element, options) {
         if ((message = this.presence(element, options)) && options.allow_blank == true) {
           return;
         } else if (message) {
           return message;
         } else {
-          for (var i = 0; i < options['in'].length; i++) {
-            if (options['in'][i] == element.val()) {
+          if (options['in']) {
+            for (var i = 0; i < options['in'].length; i++) {
+              if (options['in'][i] == element.val()) {
+                return options.message;
+              }
+            }
+          } else if (options['range']) {
+            var lower = options['range'][0],
+                upper = options['range'][1];
+            if (element.val() >= lower && element.val() <= upper) {
               return options.message;
             }
           }
@@ -223,61 +236,75 @@ var clientSideValidations = {
         } else if (message) {
           return message;
         } else {
-          for (var i = 0; i < options['in'].length; i++) {
-            if (options['in'][i] == element.val()) {
+          if (options['in']) {
+            for (var i = 0; i < options['in'].length; i++) {
+              if (options['in'][i] == element.val()) {
+                return;
+              }
+            }
+            return options.message;
+          } else if (options['range']) {
+            var lower = options['range'][0],
+                upper = options['range'][1];
+
+            if (element.val() >= lower && element.val() <= upper) {
               return;
+            } else {
+              return options.message;
             }
           }
+        }
+      },
+      confirmation: function(element, options) {
+        if (element.val() != jQuery('#' + element.attr('id') + '_confirmation').val()) {
           return options.message;
         }
       }
     },
     remote: {
       uniqueness: function(element, options) {
-        if ((message = clientSideValidations.validators.local.presence(element, options)) && options.allow_blank == true) {
-          return;
-        } else if (message) {
-          return message;
-        } else {
-          var data = {};
-          data['case_sensitive'] = !!options.case_sensitive;
-          if (options.id) {
-            data['id'] = options.id;
-          }
+        var data = {};
+        data['case_sensitive'] = !!options.case_sensitive;
+        if (options.id) {
+          data['id'] = options.id;
+        }
 
-          if (options.scope) {
-            data.scope = {}
-            for (key in options.scope) {
-              var scoped_element = jQuery('[name="' + element.attr('name').replace(/\[\w+]$/, '[' + key + ']' + '"]'));
-              if (scoped_element[0] && scoped_element.val() != options.scope[key]) {
-                data.scope[key] = scoped_element.val();
-                scoped_element.unbind('change.' + element.id).bind('change.' + element.id, function() { element.trigger('change'); element.trigger('focusout'); });
-              } else {
-                data.scope[key] = options.scope[key];
-              }
+        if (options.scope) {
+          data.scope = {}
+          for (key in options.scope) {
+            var scoped_element = jQuery('[name="' + element.attr('name').replace(/\[\w+]$/, '[' + key + ']' + '"]'));
+            if (scoped_element[0] && scoped_element.val() != options.scope[key]) {
+              data.scope[key] = scoped_element.val();
+              scoped_element.unbind('change.' + element.id).bind('change.' + element.id, function() { element.trigger('change'); element.trigger('focusout'); });
+            } else {
+              data.scope[key] = options.scope[key];
             }
           }
+        }
 
-          // Kind of a hack but this will isolate the resource name and attribute.
-          // e.g. user[records_attributes][0][title] => records[title]
-          // e.g. user[record_attributes][title] => record[title]
-          // Server side handles classifying the resource properly
-          if (/_attributes]/.test(element.attr('name'))) {
-            var name = element.attr('name').match(/\[\w+_attributes]/g).pop().match(/\[(\w+)_attributes]/).pop();
-            name += /(\[\w+])$/.exec(element.attr('name'))[1];
-          } else {
-            var name = element.attr('name');
-          }
-          data[name] = element.val();
+        // Kind of a hack but this will isolate the resource name and attribute.
+        // e.g. user[records_attributes][0][title] => records[title]
+        // e.g. user[record_attributes][title] => record[title]
+        // Server side handles classifying the resource properly
+        if (/_attributes]/.test(element.attr('name'))) {
+          var name = element.attr('name').match(/\[\w+_attributes]/g).pop().match(/\[(\w+)_attributes]/).pop();
+          name += /(\[\w+])$/.exec(element.attr('name'))[1];
+        } else {
+          var name = element.attr('name');
+        }
 
-          var response = jQuery.ajax({
-            url: '/validators/uniqueness.json',
-            data: data,
-            async: false
-          }).responseText;
-          if (!jQuery.parseJSON(response)) {
-            return options.message;
-          }
+        // Override the name if a nested module class is passed
+        if (options['class']) {
+          name = options['class'] + '[' + name.split('[')[1]
+        }
+        data[name] = element.val();
+
+        if (jQuery.ajax({
+          url: '/validators/uniqueness.json',
+          data: data,
+          async: false
+        }).status == 200) {
+          return options.message;
         }
       }
     }
@@ -290,14 +317,13 @@ var clientSideValidations = {
               labelErrorField = jQuery(settings.label_tag),
               label = jQuery('label[for="' + element.attr('id') + '"]:not(.message)');
 
-          // Killing the live event then re-enabling them is probably not very performant
-          // $('[data-validators]').die('focusout');
+          if (element.attr('autofocus')) { element.attr('autofocus', false) };
           element.before(inputErrorField);
           inputErrorField.find('span#input_tag').replaceWith(element);
           inputErrorField.find('label.message').attr('for', element.attr('id'));
+          labelErrorField.find('label.message').attr('for', element.attr('id'));
           label.replaceWith(labelErrorField);
           labelErrorField.find('label#label_tag').replaceWith(label);
-          // $('[data-validators]').live('focusout', function() { clientSideValidations.validateElement(this) });
         }
         jQuery('label.message[for="' + element.attr('id') + '"]').text(message);
       },
@@ -308,10 +334,8 @@ var clientSideValidations = {
             labelErrorField = label.closest('.' + errorFieldClass);
 
         if (inputErrorField[0]) {
-          // jQuery('[data-validators]').die('focusout');
           inputErrorField.find('#' + element.attr('id')).detach();
           inputErrorField.replaceWith(element);
-          // jQuery('[data-validators]').live('focusout', function() { clientSideValidations.validateElement(this) });
           label.detach();
           labelErrorField.replaceWith(label);
         }
@@ -319,7 +343,7 @@ var clientSideValidations = {
     },
     'SimpleForm::FormBuilder': {
       add: function(element, settings, message) {
-        if (element.attr('data-valid') !== "false") {
+        if (element.data('valid') !== false) {
           var wrapper = element.closest(settings.wrapper_tag);
           wrapper.addClass(settings.wrapper_error_class);
           var errorElement = $('<' + settings.error_tag + ' class="' + settings.error_class + '">' + message + '</' + settings.error_tag + '>');
@@ -338,7 +362,7 @@ var clientSideValidations = {
     },
     'Formtastic::SemanticFormBuilder': {
       add: function(element, settings, message) {
-        if (element.attr('data-valid') !== "false") {
+        if (element.data('valid') !== false) {
           var wrapper = element.closest('li');
           wrapper.addClass('error');
           var errorElement = $('<p class="' + settings.inline_error_class + '">' + message + '</p>');
@@ -353,15 +377,22 @@ var clientSideValidations = {
         var errorElement = wrapper.find('p.' + settings.inline_error_class);
         errorElement.remove();
       }
-
+    },
+    'NestedForm::Builder': {
+      add: function(element, settings, message) {
+        clientSideValidations.formBuilders['ActionView::Helpers::FormBuilder'].add(element, settings, message);
+      },
+      remove: function(element, settings, message) {
+        clientSideValidations.formBuilders['ActionView::Helpers::FormBuilder'].remove(element, settings, message);
+      }
     }
   },
   callbacks: {
     element: {
       after:  function(element, eventData)                    { },
       before: function(element, eventData)                    { },
-      fail:   function(element, message, callback, eventData) { callback() },
-      pass:   function(element, callback, eventData)          { callback() }
+      fail:   function(element, message, addError, eventData) { addError() },
+      pass:   function(element, removeError, eventData)       { removeError() }
     },
     form: {
       after:  function(form, eventData) { },
