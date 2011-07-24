@@ -19,7 +19,7 @@ class FeedpostsController < ApplicationController
     @feedpost = Feedpost.find(params[:id])
 
     #@relatedfeeds = Feedpost.recents.limit(4)
-    @relatedfeeds = Feedpost.search("title: "+@feedpost.title).facet('tags', :tags, :global => true).desc(:published).size(4)
+    #@relatedfeeds = Feedpost.search("title: "+@feedpost.title).facet('tags', :tags, :global => true).desc(:published).size(4)
     #@relatedfeeds = Feedpost.search("title: "+@feedpost.title).desc(:published).size(4)
     #debugger
     @postsites = Sitefeed.where(:feedpost_id => @feedpost.id)
