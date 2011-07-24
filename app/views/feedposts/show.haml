@@ -3,6 +3,7 @@
     .grid_8.alpha.omega
       .breadcrumb
         =# sanitize @feedpost.title
+        = render "links"
       .description
         %h1= sanitize @feedpost.title
       .meta

@@ -1,6 +1,8 @@
 class Feedpost
   include Mongoid::Document
+  include Mongo::Voteable
   include Mongoid::Timestamps
+  include Mongoid::Mebla
 
   field :title
   field :url
@@ -16,8 +18,12 @@ class Feedpost
   field :realurl
   field :tags, :type => Array
 
-  referenced_in :feed
+  voteable self, :up => +1, :down => -1
+  referenced_in :feed, index: true
   references_many :sitefeeds
+
+  index :published
+  search_in :author, :summary, :published, :categories, :tags, :title# => { :boost => 2.0, :analyzer => 'titlelyzer' }
 
   default_scope descending(:published)
   #scope :recents, where(published: {'$gte' => Time.now.midnight, '$lt' => Time.now.midnight + 24.hours})

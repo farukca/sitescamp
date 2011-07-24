@@ -1,11 +1,11 @@
 class User
   include Mongoid::Document
+  include Mongo::Voter
+  include Mongoid::Timestamps
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable, :lockable and :timeoutable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
-
-  include Mongoid::Timestamps
 
   # Include default devise modules. Others available are:
   # :token_authenticatable, :lockable, :timeoutable, :confirmable and :activatable, :rpx_connectable, :omniauthable

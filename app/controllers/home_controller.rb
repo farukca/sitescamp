@@ -17,4 +17,10 @@ class HomeController < ApplicationController
 
   end
 
+  def search
+    searchTxt  = params[:searchfield]
+    unless searchTxt.to_s.blank?
+      @feedposts = Mebla.search("title: "+searchTxt, :page => (params[:page] || 1)).desc(:published).size(50)#.page params[:page]
+    end 
+  end
 end

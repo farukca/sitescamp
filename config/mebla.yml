@@ -1,0 +1,15 @@
+defaults: &defaults
+  host: localhost
+  port: 9200
+  
+development:
+  <<: *defaults
+  index: sitescamp-dev
+  
+test:
+  <<: *defaults
+  index: sitescamp-test
+  
+production:
+  <<: *defaults
+  index: sitescamp-prod

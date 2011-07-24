@@ -12,7 +12,6 @@ The following style may be *conditionally* included for improved support on olde
 form.formtastic fieldset ol li fieldset legend { margin-left: -6px;}
 
 --------------------------------------------------------------------------------------------------*/
-form.formtastic fieldset > ol > li.search input { width:100%; }
 /**
  * Buttons
  */
@@ -320,6 +319,7 @@ form.formtastic fieldset > ol > li label small {
 .form .form-input .radiogroup {
   width: 100%;
   max-width: 300px;
+  padding:3px;
 }
 .form .form-input textarea {
   position: relative;

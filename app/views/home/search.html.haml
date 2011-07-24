@@ -1,0 +1,14 @@
+.container_12
+  .grid_8
+    .grid_8.alpha.omega
+      %h3 Search Results
+      #posts.full_posts
+        %ol
+          = render :partial => "feedposts/categoried_post", :locals => { :feedposts => @feedposts }
+        #paginator
+          =# paginate @feedposts, :remote => true
+  .grid_4
+    #sidebar
+      .widget
+        = render "search_form"
+

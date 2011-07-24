@@ -21,10 +21,7 @@
   .grid_4
     #sidebar
       .widget
-        = form_tag search_sites_path, :id => "search-form", :method => 'get' do
-          %span.glass
-            %i
-          = text_field_tag :searchfield, params[:searchfield]
+        = render "search_form"
       .widget
         .tabs
           .tab_wrap

@@ -3,6 +3,7 @@ class Feed
   include Mongoid::Timestamps
   #include Mongoid::Paperclip
   include Mongoid::Taggable
+  include Mongoid::Mebla
 
   field :title
   field :site_url
@@ -11,6 +12,8 @@ class Feed
   field :etag
   field :last_modified, :type => Time
   field :logo
+  field :detail
+
   mount_uploader :logo, AvatarUploader
   #has_mongoid_attached_file :logo,
   #  :url   => '/assets/feeds/:id/:style.:extension',
@@ -21,7 +24,10 @@ class Feed
   references_many :groupfeeds
   referenced_in :category
   #referenced_in :channel
-
+  
+  index :title
+  search_in :title #=> { :boost => 2.0, :analyzer => 'titlelyzer' }
+  
   attr_accessible :title, :site_url, :feed_url, :logo, :remote_logo_url
 
   validates_presence_of   :feed_url

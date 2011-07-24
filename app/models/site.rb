@@ -8,7 +8,7 @@ class Site
 
   field :website
   field :name
-  field :desc
+  field :detail
   field :email
   field :phone
   field :logo

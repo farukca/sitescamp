@@ -10,13 +10,14 @@
         .widget
           #feed_details
             %p
-              Buraya site detayları gelecek
+              = @site.name
+              = link_to "(Edit)", edit_site_path(@site)
           #feed_links
             %ul
               %li
-                Website
+                = link_to @site.website, @site.website, :target => "_blank"
               %li
-                Twitter
+                = @site.detail
 
     #archive.grid_7
       .grid_7.alpha.omega
@@ -27,7 +28,8 @@
         #posts.full_posts
           %ol
             = render :partial => "feedposts/categoried_post", :locals => { :feedposts => @feedposts }
-          = paginate @feedposts, :remote => true, :theme => "show_more_theme"
+          #paginator
+            = paginate @feedposts, :remote => true, :theme => "show_more_theme"
       .grid_7.alpha.omega
         #related
           %h4

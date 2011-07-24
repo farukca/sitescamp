@@ -1,8 +1,13 @@
-- for post in feedposts
-  %li
-    .image
-      = image_tag post.feed.logo.url, :class => "img-load", :size => "45x45"
-    .details
-      %h5
-        = link_to (sanitize post.title), feedpost_path(post)
-      %span.date= post.published.strftime("%m/%d/%Y")
+- unless feedposts.nil?
+  - for post in feedposts
+    %li
+      .image
+        = image_tag post.feed.logo.url, :class => "img-load", :size => "45x45"
+      .details
+        %h5
+          = link_to (sanitize post.title), feedpost_path(post)
+        %span.date
+          - unless post.author.nil?
+            = post.author
+          = link_to post.feed.title, feed_path(post.feed)
+          = post.published.strftime("%m/%d/%Y")

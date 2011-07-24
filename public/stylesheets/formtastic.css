@@ -70,8 +70,8 @@ form.formtastic fieldset > ol > li p.inline-hints { color:#666; margin:0.5em 0 0
 
 /* INLINE ERRORS
 --------------------------------------------------------------------------------------------------*/
-form.formtastic fieldset > ol > li p.inline-errors { color:#cc0000; margin:0.5em 0 0 25%; }
-form.formtastic fieldset > ol > li ul.errors { color:#cc0000; margin:0.5em 0 0 25%; list-style:square; }
+form.formtastic fieldset > ol > li p.inline-errors { background: #AA2000; color:#fff; margin:0.2em 0 0 27%; font-weight: bold; position: relative; text-align: center; width: 100px; z-index: 999; -webkit-border-radius: 4px; -moz-border-radius: 40px; border-radius: 4px; }
+form.formtastic fieldset > ol > li ul.errors { color:#cc0000; margin:0.2em 0 0 27%; list-style:square; }
 form.formtastic fieldset > ol > li ul.errors li { padding:0; border:none; display:list-item; }
 
 
@@ -83,7 +83,7 @@ form.formtastic fieldset > ol > li.numeric input,
 form.formtastic fieldset > ol > li.email input,
 form.formtastic fieldset > ol > li.url input,
 form.formtastic fieldset > ol > li.phone input,
-form.formtastic fieldset > ol > li.search input { width:72%; }
+form.formtastic fieldset > ol > li.search input { width:72%; padding:3px; }
 
 form.formtastic fieldset > ol > li.string input[size], 
 form.formtastic fieldset > ol > li.password input[size], 

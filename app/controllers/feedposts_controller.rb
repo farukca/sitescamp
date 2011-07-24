@@ -18,9 +18,12 @@ class FeedpostsController < ApplicationController
   def show
     @feedpost = Feedpost.find(params[:id])
 
-    @relatedfeeds = Feedpost.recents.limit(4)
-    @postsites = Sitefeed.where(:feedpost_id => @feedpost.id)
+    #@relatedfeeds = Feedpost.recents.limit(4)
+    @relatedfeeds = Feedpost.search("title: "+@feedpost.title).facet('tags', :tags, :global => true).desc(:published).size(4)
+    #@relatedfeeds = Feedpost.search("title: "+@feedpost.title).desc(:published).size(4)
     #debugger
+    @postsites = Sitefeed.where(:feedpost_id => @feedpost.id)
+
     respond_with(@feedpost)
   end
 
@@ -52,7 +55,7 @@ class FeedpostsController < ApplicationController
     debugger
     calais = SemExtractor::Calais.new(:api_key => 'a5fsx98qaeyxzcc3ps4yfses', :context => source)
     #zemanta = SemExtractor::Zemanta.new(:api_key => '6nmaz6nxeqpx9f7qzxecjh23', :context => source)
-    debugger
+    #debugger
     puts zemanta.terms
     puts zemanta.categories
     #put calais.geos
@@ -70,6 +73,15 @@ class FeedpostsController < ApplicationController
      t.response
      #t.say 'Hello!'
      
+  end
+
+  def vote
+    @feedpost = Feedpost.find(params[:id])
+    if current_user
+      unless current_user.voted?(@feedpost)
+        current_user.vote(@feedpost, :up)
+      end
+    end
   end
 
   def destroy

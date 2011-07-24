@@ -9,18 +9,18 @@
       .widget
         #feed_details
           %p
-            Buraya feed detayları gelecek
+            = @feed.title
         #feed_links
           %ul
             %li
-              Website
+              = link_to @feed.site_url, @feed.site_url, :target => "_blank"
             %li
-              Twitter
+              = @feed.detail
 
   #archive.grid_7
     .grid_7.alpha.omega
       .breadcrumb
-        = @feed.title
+        =# @feed.title
       .clear
     .grid_7.alpha.omega
       #posts.full_posts

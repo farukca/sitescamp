@@ -7,6 +7,7 @@ Sitescamp::Application.routes.draw do
   devise_for :users, :path_names => { :sign_up => "register"}, :controllers => {:registrations => "registrations"}
 
   get "home/index"
+  match "/search" => "home#search", :as => :search
 
   resources :sites do
     collection do

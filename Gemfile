@@ -30,6 +30,7 @@ gem 'sqlite3-ruby', :require => 'sqlite3'
 gem 'mongoid', '~> 2.0'
 gem 'bson_ext', '~> 1.3'
 gem 'mongoid_taggable'
+gem 'voteable_mongo'
 
 gem 'haml'
 #gem 'compass', '>= 0.10.6'
@@ -38,10 +39,12 @@ gem 'formtastic'
 gem 'client_side_validations'
 gem 'kaminari'
 
-gem 'ruby-readability', :require => 'readability'
-gem 'sem_extractor', :git => 'git://github.com/apneadiving/SemExtractor.git'
-gem 'auto_excerpt'
+#gem 'ruby-readability', :require => 'readability'
+#gem 'sem_extractor', :git => 'git://github.com/apneadiving/SemExtractor.git'
 #gem 'summarize'
+gem 'auto_excerpt'
+
+gem 'mebla'
 
 #authentication
 gem 'devise', '1.1.5'
