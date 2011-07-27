@@ -74,6 +74,14 @@ class PeopleController < ApplicationController
     end
   end
 
+  def dashboard
+    @person  = Person.find(params[:id])
+    str_ids = @person.person_source_ids("F")
+    unless str_ids.blank?
+      @feedposts = Feedpost.postsbyfeeds(str_ids).only(:id,:feed_id,:title,:author,:published,:images,:summary).order_by(:published, :desc).page params[:page]
+    end
+  end
+
   def follow
     @person  = current_user.person
     group = params[:group_id]

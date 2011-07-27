@@ -1,0 +1,14 @@
+.container_12
+  #archive.grid_7
+    .grid_7.alpha.omega
+      - unless @feedposts.nil?
+        #posts.full_posts
+          %ol
+            = render :partial => "feedposts/feedpost", :collection => @feedposts
+          #paginator
+            = paginate @feedposts, :remote => true, :theme => "show_more_theme"
+  .grid_3
+    #sidebar
+      .widget
+        = render "home/search_form"
+  .clear

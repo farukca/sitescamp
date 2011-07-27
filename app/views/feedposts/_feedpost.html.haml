@@ -1,14 +1,13 @@
-%li.latest-posts{:post_id => feedpost.id, :source => feedpost.feed_id}
-  .feed-box
-    = link_to (image_tag feedpost.feed.logo.url, :alt => feedpost.feed_id, :class => "img-load"), edit_feed_url(feedpost.feed)
-    %h3.trigger
-      = link_to (sanitize feedpost.title), "#"
-    .toggle_container
-      .block
-        = feedpost.content
-    .detail
-      = link_to 'Read', feedpost_path(feedpost)
-      =# link_to 'Keys', generatekeys_feedpost_path(feedpost)
-      =# link_to 'Say', read_feedpost_path(feedpost)
-      .author
-        = link_to "#{feedpost.author} / #{feedpost.feed.title} / #{feedpost.published.strftime("%m/%d/%Y")}", feedpost_path(feedpost), :class => "author"
+%li
+  .image
+    = image_tag feedpost.feed.logo.url, :class => "img-load", :size => "45x45"
+  .details
+    %h5
+      = link_to (sanitize feedpost.title), feedpost_path(feedpost)
+    %p
+      = sanitize feedpost.summary
+    %span.date
+      - unless feedpost.author.nil?
+        = feedpost.author
+      = link_to feedpost.feed.title, feed_path(feedpost.feed)
+      = feedpost.published.strftime("%m/%d/%Y")

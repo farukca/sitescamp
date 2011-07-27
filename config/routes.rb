@@ -18,7 +18,7 @@ Sitescamp::Application.routes.draw do
 
   resources :people do
     member do
-      get 'profile', 'addgroup'
+      get 'profile', 'addgroup', 'dashboard'
     end
   end
 

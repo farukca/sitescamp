@@ -22,6 +22,8 @@
                     %li.cancel
                       = link_to "Cancel", "#", :class => "button gray close"
             - if user_signed_in?
+              %li#global-nav-dashb
+                = link_to "Dashboard", dashboard_person_path(current_user.person)
               %li#global-nav-profile
                 = link_to "Profile", profile_person_path(current_user.person)
               %li#global-nav-messages
