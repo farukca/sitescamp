@@ -4,20 +4,28 @@
     .grid_8.alpha.omega
       = render 'home/latest', :feedposts => @feedposts
     .grid_8.alpha.omega
-      .grid_4.alpha                
-        .category_list
-          = [1..4].each do |group|
-            %h4
-              %span
-                = link_to "Category #{group}", feeds_path
-            %ul
-              - for grecent in @feedposts
-                %li
-                  .image
-                    = image_tag "category_pic.jpg", :class => "img-load"
-                  .details
-                    %h5
-                      = link_to (sanitize grecent.title), feedpost_path(grecent)
+      = @categories.each_with_index do |cat, index|
+        - if index < 2
+          .grid_4{:class => ((index+1)%2 == 0) ? "omega last" : "alpha"}
+            .category_list
+              %h4
+                %span
+                  = link_to "#{cat.name}", category_path(cat)
+              %ul
+                - unless cat.homeposts.nil?
+                  = render :partial => "feedposts/categoried_post", :locals => { :feedposts => cat.homeposts }
+    .grid_8.alpha.omega
+      = @categories.each_with_index do |cat, index|
+        - if index > 1
+          .grid_4{:class => ((index+1)%2 == 0) ? "omega last" : "alpha"}
+            .category_list
+              %h4
+                %span
+                  = link_to "#{cat.name}", category_path(cat)
+              %ul
+                - unless cat.homeposts.nil?
+                  = render :partial => "feedposts/categoried_post", :locals => { :feedposts => cat.homeposts }
+
   .grid_4
     #sidebar
       .widget
@@ -44,6 +52,6 @@
                 = render :partial => "feeds/categoried_feed", :locals => { :feeds => @newfeeds }
       .widget
         %h4
-          %span 
-
+          %span
+      #feedtip
   .clear

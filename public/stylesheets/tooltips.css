@@ -60,3 +60,27 @@
 	height:9px;
 	background:url(../images/tip-twitter_arrows.gif) no-repeat -27px 0;
 }
+
+/* tooltip styling */
+#feedtip {
+	display:none;
+        border:1px solid #332e2e;
+	background:url(/images/accordionbg.gif) repeat-y;
+	height:100px;
+/*	padding:40px 30px 10px 30px;*/
+	width:200px;
+	font-size:11px;
+	color:#000;
+}
+
+/* a .label element inside tooltip */
+#feedtip .label {
+	color:yellow;
+	width:35px;
+}
+
+#feedtip a {
+	color:#ad4;
+	font-size:11px;
+	font-weight:bold;
+}

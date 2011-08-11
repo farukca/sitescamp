@@ -4,7 +4,9 @@
 #top-bar .top-bar-inside{_width:920px;min-width:920px;max-width:1040px;margin:0 40px;position:relative;}
 #top-bar ul{float:left;list-style-type:none;margin:0;}
 #top-bar ul li{margin:0;padding:0;float:left;margin-top:6px;}
-#top-bar ul li a{color:#CCCCCC;padding:4px 10px;display:block;font-weight:bold;line-height:16px}@media screen and(-webkit-min-device-pixel-ratio:0){#top-bar ul li a{padding:10px 10px 11px 10px;}}
+#top-bar ul li .settings{margin-top:-5px;}
+#top-bar ul li a{color:#CCCCCC;padding:4px 10px;display:block;font-weight:bold;line-height:16px;float:left;}
+@media screen and(-webkit-min-device-pixel-ratio:0){#top-bar ul li a{padding:10px 10px 11px 10px;}}
 #top-bar ul li a:hover{text-decoration:none;}
 #logo{float:left;}
 #logo a{text-indent:-9999px;background:transparent url(/images/footer_logo.png) no-repeat 0px 0px;display:block;color:#fff;height:40px;width:140px;margin-right:5px;outline:none;}

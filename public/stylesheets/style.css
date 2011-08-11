@@ -1855,3 +1855,27 @@ select, textarea, input[type="text"], input[type="password"], input[type="email"
     font: 13px/16px Arial,sans-serif !important;
     padding: 4px 6px;
 }
+.follow {
+	padding:30px 0 0 0;
+}
+.follow a {
+	float:right;
+}
+.feed-tooltip {
+	padding:15px 0;
+        float:left;
+}
+.feed-tooltip h5{
+	line-height:17px;
+        font-size:12px;
+	color:#cc6633;
+        float:left;
+}
+.feed-tooltip h5:hover{
+	color:#444444;
+}
+
+.feed-tooltip .image {
+	width:45px;
+	height:45px;
+}

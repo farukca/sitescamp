@@ -65,15 +65,9 @@
                       %h5
                         = link_to (sanitize rr.title), feedpost_path(rr)
                       %span.date= rr.published
-            #tabs-4.tab.tab_tags
+            #tabs-4.tab
               %ul
-                - for fr in @feedposts
-                  %li
-                    .image
-                      = image_tag fr.feed.logo.url, :class => "img-load", :width => 45, :height => 45
-                    .details
-                      %h5
-                        = link_to (sanitize fr.title), feed_path(fr)
+                = render :partial => "feeds/categoried_feed", :locals => { :feeds => @newfeeds }
       .widget
         %h4
           %span

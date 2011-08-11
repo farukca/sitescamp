@@ -1,0 +1,20 @@
+.container_12
+  .grid_8
+    .messages
+      %p#notice
+        = notice
+    .widget
+      %p
+        %b Name:
+        = @category.name
+      %p
+        %b Desc
+        = @category.desc
+    #channels
+      %h2 Channels
+      = render :partial => "channels/channel", :collection => @category.channels
+      %h2 Add Channel:
+      = render "channels/form"
+    .links
+      = link_to 'Edit', edit_category_path(@category)
+      = link_to 'Back', categories_path

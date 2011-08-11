@@ -5,5 +5,6 @@
     =# f.input :category, :as => :select, :collection => Category.where({:category_type => 'F'})
     = f.input :logo, :as => :file
     = f.input :remote_logo_url
-
+    = f.input :category_id, :as => :select, :collection => Category.all
+    = f.input :detail
   = f.buttons

@@ -114,13 +114,13 @@ padding-left:8px;
 	color:#000;	 
 	outline:0;
 }
-
+/*
 .sf-menu li ul {
 	margin-left:0;
 	padding-top:20px;
 	background:url(/images/roboust/nav-top.png) no-repeat top center;
 	}
-	
+*/	
 .sf-menu li ul li ul {
 	margin-left:1px;
 	margin-top:-1px;

@@ -4,7 +4,11 @@
 jQuery.ajaxSetup({
   'beforeSend': function(xhr) {xhr.setRequestHeader("Accept", "text/javascript")}
 });
-
+function getFeedInfo(feedid) {
+   $.ajax({
+     url: "/feeds/tipinfo/"+feedid
+   });
+}
 $(document).ready(function() {
   var currPage = 1;
 
@@ -28,6 +32,16 @@ $(document).ready(function() {
 
   $('.popupballoon .close').click(function(){
       $(this).parents('.popupballoon').fadeOut();
+  });
+
+  $(".feed-title").tooltip({ 
+    onBeforeShow: function(event) {
+      $('#feedtip').html("");
+      getFeedInfo(this.getTrigger().attr("feed_id"));
+    },
+    position:'center right',
+    offset:[-50, -50],
+    tip: '#feedtip'
   });
 });
 

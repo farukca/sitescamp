@@ -1,0 +1,8 @@
+.feed-tooltip
+  .image
+    = image_tag feed.logo.url, :class => "img-load", :size => "45x45"
+  .details
+    %h5
+      = sanitize feed.title
+    %p
+      = sanitize feed.detail

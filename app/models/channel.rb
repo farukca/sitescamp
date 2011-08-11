@@ -1,10 +1,12 @@
 class Channel
   include Mongoid::Document
+  include Mongoid::Timestamps
+  include Mongoid::Taggable
+
   field :name
   field :desc
   field :icon
   referenced_in :category
-  field :feeds, :type => Array
 
   validates_presence_of :name
   validates_length_of :name, :minimum => 2, :maximum => 30

@@ -1,0 +1,9 @@
+.container_12
+  .grid_8
+    .messages
+      %p#notice
+        = notice
+    %h1 New category
+    .form
+      = render 'form'
+    = link_to 'Back', categories_path

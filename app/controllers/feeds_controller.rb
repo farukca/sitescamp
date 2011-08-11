@@ -1,6 +1,6 @@
 class FeedsController < ApplicationController
 
-  #before_filter :authenticate_user!, :except => [:search, :show, :index]
+  before_filter :authenticate_user!, :only => [:follow]
 
   respond_to :html, :js
 
@@ -72,6 +72,28 @@ class FeedsController < ApplicationController
     #@feeds  = Feed.any_in(:id => str_ids).ascending(:title)
     @feeds = Feed.find(:all)
     respond_with @feeds
+  end
+
+  def tipinfo
+    @feed = Feed.find(params[:id])
+  end
+
+  def follow
+    @person  = current_user.person
+    group = params[:group_id]
+    @feed = Feed.find(params[:id])
+    unless @feed.nil?
+      if not group.to_s.blank?
+        @grpfeed = Groupfeed.create!(
+          :group_id  => group,
+          :person_id => @person.id,
+          :feed_id   => @feed.id
+        )
+      end
+
+      @person.add_feed_to_follow(@feed)
+    end
+    respond_with @feed, :notice => @feed.title+" added to sources"
   end
 
 end

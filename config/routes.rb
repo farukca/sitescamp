@@ -24,7 +24,7 @@ Sitescamp::Application.routes.draw do
 
   resources :feeds do
     member do
-      get 'getnews'
+      get 'getnews', 'follow'
     end
   end
   resources :feedposts do

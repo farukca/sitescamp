@@ -24,21 +24,24 @@
             - if user_signed_in?
               %li#global-nav-dashb
                 = link_to "Dashboard", dashboard_person_path(current_user.person)
-              %li#global-nav-profile
-                = link_to "Profile", profile_person_path(current_user.person)
-              %li#global-nav-messages
-                = link_to "Messages", root_url
               %li#global-nav-whotofollow
-                = link_to "Who to follow", root_url
+                =# link_to "Sources4You", root_url
             .clear
         #global-user-nav
           %ul
             %li#global-user-links
               - if user_signed_in?
                 = link_to current_user.email, profile_person_path(current_user.person)
-                %ul
-                  %li
-                    = link_to "Signout", destroy_user_session_path
+                %ul.sf-menu
+                  %li.settings
+                    = link_to (image_tag "icons/settings.png"), "#"
+                    %ul
+                      %li.first
+                        = link_to "Profile", profile_person_path(current_user.person)
+                      %li
+                        = link_to "Messages", root_url
+                      %li
+                        = link_to "Signout", destroy_user_session_path
               - else
                 = link_to "Sign in", new_user_session_path
 #bottom

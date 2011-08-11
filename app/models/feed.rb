@@ -28,7 +28,7 @@ class Feed
   index :title
   search_in :title #=> { :boost => 2.0, :analyzer => 'titlelyzer' }
   
-  attr_accessible :title, :site_url, :feed_url, :logo, :remote_logo_url
+  attr_accessible :title, :site_url, :feed_url, :logo, :remote_logo_url, :category_id, :detail
 
   validates_presence_of   :feed_url
   validates_uniqueness_of :feed_url, :case_sensitive => false
@@ -39,16 +39,18 @@ class Feed
     #updated_feed.sanitize_entries!
     #debugger
     unless updated_feed.nil?
-      updated_feed.entries.each do |entry|
-        create_new_entry(entry, source_feed)
-      end
+      unless updated_feed.entries.nil?
+        updated_feed.entries.each do |entry|
+          create_new_entry(entry, source_feed)
+        end
 
-      source_feed.title     = updated_feed.title
-      source_feed.site_url  = updated_feed.url
-      source_feed.etag      = updated_feed.etag
-      source_feed.last_modified = updated_feed.last_modified
-      source_feed.status    = "A"
-      source_feed.save!
+        source_feed.title     = updated_feed.title
+        source_feed.site_url  = updated_feed.url
+        source_feed.etag      = updated_feed.etag
+        source_feed.last_modified = updated_feed.last_modified
+        source_feed.status    = "A"
+        source_feed.save!
+      end
     end
   end
   handle_asynchronously :get_entries, :priority => 10

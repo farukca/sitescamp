@@ -30,7 +30,7 @@ class PeopleController < ApplicationController
     end
 
     #other feeds
-    @recommendedfeeds = Feed.only(:id,:title).not_in(:_id => str_ids).descending(:created_at).limit(10)
+    @newfeeds = Feed.only(:id,:title).not_in(:_id => str_ids).descending(:created_at).limit(10)
 
 
     # source people entries
@@ -80,24 +80,6 @@ class PeopleController < ApplicationController
     unless str_ids.blank?
       @feedposts = Feedpost.postsbyfeeds(str_ids).only(:id,:feed_id,:title,:author,:published,:images,:summary).order_by(:published, :desc).page params[:page]
     end
-  end
-
-  def follow
-    @person  = current_user.person
-    group = params[:group_id]
-    @feed = Feed.find(params[:feed_id])
-    if not @feed.nil?
-      if not group.to_s.blank?
-        @grpfeed = Groupfeed.create!(
-          :group_id  => group,
-          :person_id => @person.id,
-          :feed_id   => @feed.id
-        )
-      end
-
-      @person.add_feed_to_follow(@feed)
-    end
-    respond_with @grpfeed, :notice => "Feed added to Group"
   end
 
   def edit

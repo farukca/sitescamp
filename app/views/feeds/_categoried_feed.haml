@@ -2,6 +2,10 @@
   %li
     .image
       = image_tag feed.logo.url.to_s, :class => "img-load", :size => "45x45"
-    .details
-      %h5
-        = link_to (sanitize feed.title), feed_path(feed)
+    .feed-info{:feed_id => feed.id}
+      .details
+        %h5.feed-title{:feed_id => feed.id}
+          = link_to (sanitize feed.title), feed_path(feed)
+    - if user_signed_in?
+      .follow
+        = link_to "Follow", follow_feed_path(feed), :remote => true, :style => "button button-gray"
