@@ -40,8 +40,9 @@ $(document).ready(function() {
       getFeedInfo(this.getTrigger().attr("feed_id"));
     },
     position:'center right',
-    offset:[-50, -50],
-    tip: '#feedtip'
+    offset:[-50, -150],
+    tip: '#feedtip',
+    delay:3000
   });
 });
 

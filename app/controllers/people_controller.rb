@@ -80,6 +80,7 @@ class PeopleController < ApplicationController
     unless str_ids.blank?
       @feedposts = Feedpost.postsbyfeeds(str_ids).only(:id,:feed_id,:title,:author,:published,:images,:summary).order_by(:published, :desc).page params[:page]
     end
+    @feeds = Feed.where(:_id.in => Feedpost.today.distinct(:feed_id))
   end
 
   def edit
@@ -96,6 +97,12 @@ class PeopleController < ApplicationController
       flash[:error] = I18n.t 'people.update.failed'
       redirect_to edit_person_path
     end
+  end
+
+  def todaysfeed
+    todayfeeds = []
+    todayfeeds = Feedpost.today.distinct(:feed_id)
+    return todayfeeds.to_s
   end
 
 end

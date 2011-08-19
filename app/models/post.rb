@@ -17,6 +17,7 @@ class Post
 
   referenced_in :site
   referenced_in :user
+  referenced_in :feedpost
   validates_presence_of :user, :site, :content
 
 end

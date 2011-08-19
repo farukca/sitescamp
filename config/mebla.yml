@@ -1,6 +1,6 @@
 defaults: &defaults
   host: localhost
-  port: 9200
+  #port: 9200
   
 development:
   <<: *defaults

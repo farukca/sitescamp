@@ -35,18 +35,20 @@
           .tab_wrap
             %ul.nav
               %li= link_to "Popular", "#tabs-1"
-              %li= link_to "Recent", "#tabs-2"
-              %li= link_to "Read", "#tabs-3"
-              %li= link_to "Follow", "#tabs-4"
+              %li= link_to "Today", "#tabs-2"
+              %li= link_to "Yesterday", "#tabs-3"
+              %li= link_to "Last Added", "#tabs-4"
             #tabs-1.tab
               %ul
                 = render :partial => "feedposts/categoried_post", :locals => { :feedposts => @feedposts }
             #tabs-2.tab
               %ul
-                = render :partial => "feedposts/categoried_post", :locals => { :feedposts => @feedposts }
+                - unless @todayfeeds.nil?
+                  = render :partial => "infograph", :locals => { :feeds => @todayfeeds, :day => 'today' }
             #tabs-3.tab
               %ul
-                = render :partial => "feedposts/categoried_post", :locals => { :feedposts => @feedposts }
+                - unless @yesterdayfeeds.nil?
+                  = render :partial => "infograph", :locals => { :feeds => @yesterdayfeeds, :day => 'yesterday' }
             #tabs-4.tab
               %ul
                 = render :partial => "feeds/categoried_feed", :locals => { :feeds => @newfeeds }

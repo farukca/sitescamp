@@ -38,6 +38,8 @@ gem 'haml'
 gem 'formtastic'
 gem 'client_side_validations'
 gem 'kaminari'
+gem 'validate_url'
+gem 'errational'
 
 #gem 'ruby-readability', :require => 'readability'
 #gem 'sem_extractor', :git => 'git://github.com/apneadiving/SemExtractor.git'

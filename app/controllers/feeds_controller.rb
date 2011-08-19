@@ -20,6 +20,9 @@ class FeedsController < ApplicationController
     @feed = Feed.find(:first, :conditions => {:feed_url => params[:feed][:feed_url]})
 
     if @feed.nil?
+      unless check_url(params[:feed][:feed_url])
+        raise SitescampException::InvalidUrl
+      end
       @feed = Feed.create!(params[:feed])
       @feed.get_entries(@feed)
     end
@@ -94,6 +97,15 @@ class FeedsController < ApplicationController
       @person.add_feed_to_follow(@feed)
     end
     respond_with @feed, :notice => @feed.title+" added to sources"
+  end
+
+  
+  def check_url (url)
+    regexp =/(^$)|(^(http|https):\/\/[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(([0-9]{1,5})?\/.*)?$)/ix
+    if not regexp.match(url)
+       return false 
+    end
+    return true 
   end
 
 end

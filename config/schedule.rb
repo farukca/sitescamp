@@ -18,6 +18,6 @@
 # end
 
 # Learn more: http://github.com/javan/whenever
-every 2.hours do
+every 1.hour do
   runner "Feed.select_to_update"
 end

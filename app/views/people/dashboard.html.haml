@@ -1,5 +1,5 @@
 .container_12
-  #archive.grid_7
+  #archive.grid_9
     .grid_7.alpha.omega
       - unless @feedposts.nil?
         #posts.full_posts
@@ -11,4 +11,20 @@
     #sidebar
       .widget
         = render "home/search_form"
+
+      .widget
+        .tabs
+          .tab_wrap
+            %ul.nav
+              %li= link_to "Popular", "#tabs-1"
+              %li= link_to "Recent", "#tabs-2"
+              %li= link_to "Read", "#tabs-3"
+              %li= link_to "Follow", "#tabs-4"
+            #tabs-1.tab
+              %ul      
+                - unless @feeds.nil?
+                  = render :partial => "home/infograph", :locals => { :feeds => @feeds }
+            #tabs-2.tab
+            #tabs-3.tab
+            #tabs-4.tab
   .clear

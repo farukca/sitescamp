@@ -1,0 +1,12 @@
+- for feed in feeds
+  %li
+    .image
+      = image_tag feed.logo.url.to_s, :class => "img-load", :size => "45x45"
+    .panel
+      .details
+        %h5
+          = link_to (sanitize feed.title), feed_path(feed)
+        - if day == 'today'
+          %span= feed.todaycount
+        - else
+          %span= feed.yesterdaycount

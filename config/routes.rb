@@ -13,8 +13,9 @@ Sitescamp::Application.routes.draw do
     collection do
       get 'search'
     end
-    resources :posts
   end
+
+  resources :posts
 
   resources :people do
     member do

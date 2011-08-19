@@ -2,10 +2,15 @@ class PostsController < ApplicationController
 
   before_filter :authenticate_user!, :except => [:search, :show, :index]
 
-  respond_to :html
+  respond_to :html, :js
 
   def index
     @posts = Post.find(:all, :conditions => {:site_id => params[:site_id]}).paginate(:all, :per_page => 5, :page => params[:page])
+  end
+
+  def new
+    @post = Post.new
+    respond_with(@post)
   end
   
   def create

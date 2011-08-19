@@ -21,13 +21,15 @@ class Feedpost
   voteable self, :up => +1, :down => -1
   referenced_in :feed, index: true
   references_many :sitefeeds
+  references_many :posts
 
   index :published
   search_in :author, :summary, :published, :categories, :tags, :title# => { :boost => 2.0, :analyzer => 'titlelyzer' }
 
   default_scope descending(:published)
   #scope :recents, where(published: {'$gte' => Time.now.midnight, '$lt' => Time.now.midnight + 24.hours})
-  #scope :recents, where(:published.gte=>Date.today.midnight)
+  scope :today, where(:published.gte => Time.now.midnight)
+  scope :yesterday, where(:published.gte => Time.now.midnight-1.days, :published.lt => Time.now.midnight)
   scope :recents, order_by(:published, :desc)
   scope :with_images, where(:images.exists => true) 
 

@@ -9,7 +9,7 @@
 @media screen and(-webkit-min-device-pixel-ratio:0){#top-bar ul li a{padding:10px 10px 11px 10px;}}
 #top-bar ul li a:hover{text-decoration:none;}
 #logo{float:left;}
-#logo a{text-indent:-9999px;background:transparent url(/images/footer_logo.png) no-repeat 0px 0px;display:block;color:#fff;height:40px;width:140px;margin-right:5px;outline:none;}
+#logo a{text-indent:-9999px;background:transparent url(/images/footer_logo.png) no-repeat 0px 0px;display:block;color:#fff;height:40px;width:140px;margin-right:5px;outline:none;margin-top:-10px;}
 #top-bar .active-links{width:350px;position:absolute;right:0;top:0;_padding-top:5px;}
 #global-user-nav{float:right;margin-right:5px;}
 #global-nav{float:left;margin-left:8px;}
@@ -52,3 +52,5 @@
 #session #screen-name{color:#bababa;cursor:pointer;font-weight:normal;}
 #session #screen-name:after{width:7px;height:7px;display:inline-block;background:transparent url(/images/sprite-icons.png) no-repeat scroll -79px -68px;content:"&darr;";text-indent:-99999px;vertical-align:top;margin-top:8px;margin-left:1px;}
 #session:hover #screen-name,#session:hover #signup-link,#session:hover #signin-link,.active #signin-link{color:#fff;}
+.note a{float:left;display:block;color:#fff;height:40px;width:40px;margin-right:10px;outline:none;margin-top:-5px;}
+

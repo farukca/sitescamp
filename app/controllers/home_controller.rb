@@ -15,6 +15,8 @@ class HomeController < ApplicationController
       @newfeeds = Feed.where(:status => 'A').descending(:created_at).limit(10)
     end
     @categories = Category.desc(:score).limit(4).cache
+    @todayfeeds = Feed.where(:_id.in => Feedpost.today.distinct(:feed_id))
+    @yesterdayfeeds = Feed.where(:_id.in => Feedpost.yesterday.distinct(:feed_id))
   end
 
   def search

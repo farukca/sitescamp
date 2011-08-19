@@ -4,6 +4,7 @@ class Feed
   #include Mongoid::Paperclip
   include Mongoid::Taggable
   include Mongoid::Mebla
+  include ActiveModel::Validations
 
   field :title
   field :site_url
@@ -32,6 +33,9 @@ class Feed
 
   validates_presence_of   :feed_url
   validates_uniqueness_of :feed_url, :case_sensitive => false
+  validates_url :feed_url
+  validates_url :site_url, :allow_blank => true
+
   #validates_attachment_content_type :logo, :content_type => ['image/jpeg', 'image/jpg', 'image/png']
 
   def get_entries(source_feed)
@@ -124,6 +128,14 @@ class Feed
     feeds.each do |feed|
       feed.get_new_entries(feed)
     end
+  end
+
+  def todaycount
+    return Feedpost.count(conditions: {:published.gte => Time.now.midnight, :feed_id => self.id})
+  end
+
+  def yesterdaycount
+    return Feedpost.count(conditions: {:published.gte => Time.now.midnight-1.day, :published.lt => Time.now.midnight, :feed_id => self.id})
   end
 
 end

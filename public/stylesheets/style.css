@@ -502,6 +502,7 @@ pre {
 	width:190px;
 	float:left;
 	margin:0 25px 0px 0;
+        height:250px;
 }
 
 .post_grid, .category_list, .tab{
@@ -588,7 +589,7 @@ pre {
 	font-size:14px;
 	font-weight:normal;
 	line-height:25px;
-	margin: 0 0 15px 0;
+	/*margin: 0 0 15px 0;*/
 	line-height:24px;
 }
 
@@ -651,7 +652,8 @@ pre {
 .category_list li, .tab li{
 	float:left;
 	border-bottom:1px solid #e2e2e2;
-	padding:15px 0 15px 0;
+	padding:10px 0 10px 0;
+        height:70px;
 }
 
 .category_list li.last, .tab li.last{
