@@ -48,10 +48,8 @@ class Feedpost
         site = Site.find_or_create_by(website: strHost)
         sitefeed = Sitefeed.find_or_initialize_by(site_id: site.id, feedpost_id: self.id)
         #debugger
-        if sitefeed.links.nil?
-          sitefeed.links = []
-        end
-        sitefeed.links << link
+        sitefeed.links ||= []
+        sitefeed.links << link unless sitefeed.links.include? link
         sitefeed.save!
       end
     rescue URI::InvalidURIError
@@ -129,9 +127,10 @@ class Feedpost
       links = []
       strText.scan(/href\s*=\s*\"*[^\">]*/i) do |link|
         link = link.sub(/href="/i, "")
-
+        
         unless link.nil?
           begin
+            link = link.downcase
             uri = URI.parse(URI.encode(link))
             #if feedSite != uri.host
             unless link.include? feedSite.to_s
